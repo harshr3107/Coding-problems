@@ -2,8 +2,8 @@ class Solution {
 public:
     vector<int> findDuplicates(vector<int> nums) {
         
-        //sort(nums.begin(),nums.end());
-       /* vector<int> visited(nums.size()+1,0);
+        
+        vector<int> visited(nums.size()+1,0);
         vector<int> ans;
         
         
@@ -17,29 +17,12 @@ public:
         }
         
         return ans;
-        */
         
         
         
-        vector<int> ans;
         
-        for(int i=0;i<nums.size();i++)
-        {
-            int a = abs(nums[i])-1;
-            
-            if(nums[a]<0)
-            {
-                ans.push_back(abs(nums[i]));
-            }else{
-                
-                nums[a]=-nums[a];
-            }
-                
-            
-            
-        }
+       
         
-        return ans;
         
         
         
