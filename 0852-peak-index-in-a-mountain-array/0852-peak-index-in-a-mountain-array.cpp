@@ -3,7 +3,7 @@ public:
     int peakIndexInMountainArray(vector<int>& arr) {
         
         
-        int low=0;
+        /*int low=0;
         int high=arr.size()-1;
         int mid;
         
@@ -23,9 +23,9 @@ public:
         
         return high;
         
-        
+        */
      
-        /* MY SOLUTION ON FIRST INTUTION
+    //MY SOLUTION ON FIRST INTUTION
        int low=0;
        int high=arr.size()-1;
      
@@ -60,7 +60,7 @@ public:
         return -1;
         
         
-        */
+    
         
         
         
