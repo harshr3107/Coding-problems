@@ -62,20 +62,38 @@ public:
         
         pivot=low;
         
-        //cout<<"pivot is at index "<<pivot<<endl;
+        cout<<"pivot is at index "<<pivot<<endl;
         
         if(target==nums[pivot])
         {
             return pivot;
         }
         
-        low=pivot+1;
-        high=nums.size()-1;
+        if(nums[pivot]<target && target<=nums[nums.size()-1])
+        {
+            cout<<"i entered here\n";
+            low=pivot+1;
+            high=nums.size()-1;
+            
+        }else{
+            
+            low=0;
+            high=pivot-1;
+            
+        }
+        
+        
+        
+       // low=pivot+1;
+        //high=nums.size()-1;
         
         int ans=-1;
         ans = binarysearch(nums,low,high,target);
         
-        if(ans!=-1)
+        
+        return ans;
+        
+        /*if(ans!=-1)
         {
             //cout<<"i entered here\n";
             return ans;
@@ -86,10 +104,10 @@ public:
         low=0;
         high=pivot-1;
        // cout<<"the high for the series is "<<nums[high]<<endl;
-        
+        cout<<"pivot element is "<<nums[pivot];
         ans = binarysearch(nums,low,high,target);
         
         
-        return ans;
+        return ans;*/
     }
 };
