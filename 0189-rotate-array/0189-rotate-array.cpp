@@ -18,7 +18,7 @@ public:
         k=k%nums.size();
         
         
-        vector<int>:: iterator it;
+        /*vector<int>:: iterator it;
         
         it=nums.end()-(k);
        
@@ -32,8 +32,18 @@ public:
         vector<int> merged = v;
        merged.insert(merged.end(), nums.begin(), nums.end());
         
-        nums=merged;
-            
+        nums=merged;*/
+        
+        
+        vector<int> v(nums.size());
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            v[(i+k)%nums.size()]=nums[i];
+        }
+           
+        
+        nums=v;
         
         
     }
