@@ -2,7 +2,7 @@ class Solution {
 public:
     
     
-    void moveelements(vector<int>& v,int pos)
+    /*void moveelements(vector<int>& v,int pos)
     {
         
         int j=pos;
@@ -36,11 +36,11 @@ public:
         
     }
     
-    
+    */
     
     void moveZeroes(vector<int>& nums) {
         
-    int i=0;
+    /*int i=0;
     
     while(i<nums.size())
     {
@@ -60,7 +60,28 @@ public:
         }
         
         
-    }
+    }*/
+        
+        
+        int pos=0;
+        int j=0;
+        
+        while(j<nums.size())
+        {
+            if(nums[j]!=0)
+            {
+                swap(nums[pos],nums[j]);
+                pos++;
+            }
+            j++;
+            
+            
+        }
+        
+        
+        
+          
+        
         
         
         
