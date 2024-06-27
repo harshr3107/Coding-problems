@@ -5,7 +5,7 @@ public:
         int i=0;
         int sublen= part.length();
         
-        while(i<s.length())
+        while(i+sublen<=s.length())
         {
             cout<<"value of  string is "<<s<<endl;
             
