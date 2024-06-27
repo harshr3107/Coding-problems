@@ -2,6 +2,20 @@ class Solution {
 public:
     string removeOccurrences(string s, string part) {
         
+        
+        //this question could have been done with the help of find function
+        
+                   while(s.length()!=0 && s.find(part)<s.length())
+                   {
+                        s.erase(s.find(part),part.length());
+                   }
+                   
+                   return s;
+        
+        
+        
+        /*
+        
         int i=0;
         int sublen= part.length();
         
@@ -31,6 +45,8 @@ public:
         
         return s;
         
+        
+        */
         
         
         
