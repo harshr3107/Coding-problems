@@ -65,7 +65,7 @@ public:
         
         
         
-        
+      /*  
         int i=0;
         int j=0;
         
@@ -91,7 +91,7 @@ public:
             
             i++;
             
-        }
+        }*/
         
         
         
@@ -106,7 +106,7 @@ public:
         
         
         
-       /* int pos=0;
+        int pos=0;
         int j=0;
         
         while(j<nums.size())
@@ -119,7 +119,7 @@ public:
             j++;
             
             
-        }*/
+        }
         
         
         
