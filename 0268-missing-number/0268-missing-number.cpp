@@ -17,7 +17,7 @@ public:
         
         return a;*/
         
-        sort(nums.begin(),nums.end());
+       /* sort(nums.begin(),nums.end());
         int a=0;
         int b=nums.size();
         int i=0;
@@ -40,7 +40,27 @@ public:
     }
         
         
-        return 0;
+        return 0;*/
+        
+        
+        int a=0;
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            a=a^nums[i];
+        }
+        
+        for(int i=0;i<=nums.size();i++)
+        {
+            a=a^i;
+        }
+        
+        
+        
+        return a;
+        
+        
+            
         
         
     }
