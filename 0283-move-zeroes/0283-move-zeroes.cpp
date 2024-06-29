@@ -63,7 +63,50 @@ public:
     }*/
         
         
-        int pos=0;
+        
+        
+        
+        int i=0;
+        int j=0;
+        
+        
+        while(i<nums.size())
+        {
+            if(nums[i]==0)
+            {
+                int j=i+1;
+                while(j<nums.size() && nums[j]==0)
+                {
+                    j++;
+                }
+                
+                if(j==nums.size())
+                {
+                    return;
+                }
+                
+                swap(nums[i],nums[j]);
+               
+            }
+            
+            i++;
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       /* int pos=0;
         int j=0;
         
         while(j<nums.size())
@@ -76,7 +119,7 @@ public:
             j++;
             
             
-        }
+        }*/
         
         
         
