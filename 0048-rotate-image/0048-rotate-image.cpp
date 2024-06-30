@@ -9,7 +9,7 @@ public:
         int c_end=matrix[0].size()-1;
         
         
-        while(c_start<=c_end && r_start<=r_end)
+        while(c_start<c_end && r_start<r_end)
         {
             int rs = r_start;
             int re = r_end;
