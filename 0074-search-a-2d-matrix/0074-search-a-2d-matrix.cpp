@@ -2,7 +2,48 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
-        int highrow=matrix.size()-1;
+        
+        
+        int low=0;
+        int n=matrix.size();
+        int m = matrix[0].size();
+        
+        int high=(m*n)-1;
+        int mid=0;
+        
+        while(high>=low)
+        {
+            mid=low+(high-low)/2;
+            
+            int element = matrix[mid/m][mid%m];
+            
+            if(element==target)
+            {
+                return true;
+            }else if(element>target)
+            {
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        return false;
+        
+        
+        
+        
+        
+        
+        
+        /*int highrow=matrix.size()-1;
         int lowrow=0;
         int midrow=0;
         
@@ -57,7 +98,7 @@ public:
         
         
         return false;
-        
+        */
     }
 };
 
