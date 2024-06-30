@@ -18,25 +18,16 @@ public:
             
             while(rs<r_end && cs<c_end)
             {
-                cout<<"value of rs re cs se are "<<rs<<" "<<re<<" "<<cs<<" "<<ce<<endl;
-                
+               
                 int temp = matrix[r_start][cs];
-                cout<<"value of temp is "<<temp<<endl;
+              
                     
                 matrix[r_start][cs]=matrix[re][c_start];
                 matrix[re][c_start]= matrix[r_end][ce];
                 matrix[r_end][ce]=matrix[rs][c_end];
                 matrix[rs][c_end]=temp;
                 
-                for(int i=0;i<=r_end;i++)
-                {
-                    for(int j=0;j<=c_end;j++)
-                    {
-                        cout<<matrix[i][j]<<" ";
-                    }
-                    cout<<endl;
-                }
-                
+            
                 cout<<endl;
                 
                 cs++;
@@ -46,7 +37,7 @@ public:
                 
             }
             
-            cout<<"ab mai bahar aagaya hoon\n\n";
+           
             
             r_start++;
             c_start++;
