@@ -9,24 +9,15 @@ public:
         
         while(start<nums.size())
         {
-            if(product<k) 
+            if(product<k && end!=nums.size()) 
             {
                 ans++;
-                if(end!=nums.size()-1)
+                end++;
+                if(end!=nums.size())
                 {
-                    end++;
-                    product=product*nums[end];
-                }else{
-                    
-                   product=product/nums[start];
-                   start++; 
-                    if(start!=nums.size())
-                    {
-                    end=start;
-                    product=nums[start];
-                     }
-                    
+                product=product*nums[end];
                 }
+                
                 
             }else{
                 
