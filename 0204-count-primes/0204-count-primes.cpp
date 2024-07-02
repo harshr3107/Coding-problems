@@ -15,6 +15,11 @@ public:
         
         for(int i=2;i<n;i++)
         { 
+            if(prime[i]==false)
+            {
+                continue;
+            }
+            
             if(prime[i])
             {
                 ans++;
