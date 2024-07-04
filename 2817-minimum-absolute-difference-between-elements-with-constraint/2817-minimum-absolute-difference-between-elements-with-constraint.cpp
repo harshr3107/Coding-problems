@@ -22,6 +22,7 @@ public:
             if(it==s.end())
             {
                // cout<<"mai toh yehi hoon\n";
+                mini = min(mini,abs((*it)-nums[i]));
                 if(it!=s.begin())
                 {
                     it--;
