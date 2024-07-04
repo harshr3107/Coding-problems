@@ -21,7 +21,7 @@ public:
             
             if(it==s.end())
             {
-                cout<<"mai toh yehi hoon\n";
+               // cout<<"mai toh yehi hoon\n";
                 if(it!=s.begin())
                 {
                     it--;
@@ -29,28 +29,27 @@ public:
                 
                 mini = min(mini,abs((*it)-nums[i]));
                 
-                cout<<"value of min is "<<mini<<endl;
+               // cout<<"value of min is "<<mini<<endl;
                 
                 
             }else{
                 
-                cout<<"maiii yaha aagaya nnnn\n";
+               // cout<<"maiii yaha aagaya nnnn\n";
                 
                 mini = min(mini,abs((*it)-nums[i]));
                 
-                 cout<<"value of min is "<<mini<<endl;
+                // cout<<"value of min is "<<mini<<endl;
                 
                 //cout<<"value of mini is "<<mini<<endl;
-                set<int> :: iterator it2=it;
-                it2++;
+                
                 
                 if(it!=s.begin())
                 {
-                    cout<<"kya bolrah public\n";
+                    //cout<<"kya bolrah public\n";
                     --it;
                     
                     mini = min(mini,abs((*it)-nums[i]));
-                     cout<<"value of min is "<<mini<<endl;
+                    // cout<<"value of min is "<<mini<<endl;
                 }
                 
                 /*if(it2!=s.end())
