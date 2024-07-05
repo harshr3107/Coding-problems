@@ -5,7 +5,7 @@ public:
         int low=0;
         int high=arr.size()-1;
         int mid=0;
-        int ans=0;
+       
         
         while(high>=low)
         {
@@ -13,21 +13,21 @@ public:
             
             if(arr[mid]==target)
             {
-                ans=mid;
-                return ans;
+                
+                return mid;
                 
             }else if(arr[mid]>target)
             {
                 high=mid-1;
-                ans=high;
+                
             }else{
                 low=mid+1;
-                ans=low;
+                
             }
             
         }
         
-        if(ans<0)
+        /*if(ans<0)
         {
             ans++;
             return ans;
@@ -44,8 +44,8 @@ public:
         {
             ans++;
         }
-        
-        return ans;
+        */
+        return low;
         
         
     }
