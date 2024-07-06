@@ -22,7 +22,7 @@ public:
             }
         
         
-        cout<<"pivot elment is "<<low<<endl;
+        //cout<<"pivot elment is "<<low<<endl;
         
         if(low==nums.size()-1 && nums[0]<nums[nums.size()-1])
         {
