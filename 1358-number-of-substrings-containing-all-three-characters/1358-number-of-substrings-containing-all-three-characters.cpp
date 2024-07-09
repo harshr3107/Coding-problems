@@ -29,7 +29,7 @@ public:
         int high=i;
         
         
-       // cout<<"value of low "<<low<<" value of high is "<<high<<endl;
+       
         
         while(high<s.length())
         {
@@ -38,19 +38,13 @@ public:
             
             while(high>low && m['a']>=1 && m['b']>=1 && m['c']>=1)
             {
-                //cout<<m.count('a')<<" "<<m.count('b')<<" "<<m.count('c')<<endl;
+               
                 m[s.at(low)]--;
-                //cout<<m.count('a')<<" "<<m.count('b')<<" "<<m.count('c')<<endl;
+                
                 low++;
             }
-           // cout<<"val of low is "<<low<<endl;
-            
+           
             low=low-1;
-            
-             //cout<<"val of low is "<<low<<endl;
-            
-            //cout<<"value of low "<<low<<" value of high is "<<high<<endl;
-            
             m[s.at(low)]++;
             ans+=low+1;
             
