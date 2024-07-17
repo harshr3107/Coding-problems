@@ -4,7 +4,7 @@ public:
         
         vector<vector<int>> ans;
         vector<int> v;
-        ans.push_back(v);
+        
         sort(nums.begin(),nums.end());
         
         getallcomb(nums,0,v,ans);
@@ -46,11 +46,7 @@ public:
     void getallcomb(vector<int> nums,int ind,vector<int> v,vector<vector<int>>& ans)
     {
         
-            if(ind==nums.size())
-            {
-                //ans.push_back(v);
-                return;
-            }
+           ans.push_back(v);
             
             
         
@@ -65,7 +61,7 @@ public:
             v.push_back(nums[i]);
             getallcomb(nums,i+1,v,ans);
             
-            ans.push_back(v);
+           
             v.pop_back();
            
             
