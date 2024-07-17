@@ -23,6 +23,10 @@ public:
     void getcombi(vector<int> candidates,int ind,int target,vector<int> v,vector<vector<int>>& ans)
     {
         
+        if(target<0)
+        {
+            return;
+        }
        
         
       
