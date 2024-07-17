@@ -16,11 +16,7 @@ public:
             return;
         }
         
-        if(target==0)
-        {
-            ans.push_back(v);
-            return;
-        }
+        
         
         
         v.push_back(candidates[ind]);
