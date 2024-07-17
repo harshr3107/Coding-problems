@@ -5,22 +5,23 @@ public:
         vector<vector<int>> ans;
         vector<int> v;
         ans.push_back(v);
+        sort(nums.begin(),nums.end());
         
         getallcomb(nums,0,v,ans);
         
-       sort(ans.begin(),ans.end());
+      /* sort(ans.begin(),ans.end());
         
         auto it 
         = unique(ans.begin(), ans.end()); 
  
          ans.erase(it, ans.end());
-        
+        */
         return ans;
         
     }
     
     
-    void getallcomb(vector<int> nums,int ind,vector<int> v,vector<vector<int>>& ans)
+   /* void getallcomb(vector<int> nums,int ind,vector<int> v,vector<vector<int>>& ans)
     {
         
         if(ind==nums.size())
@@ -39,5 +40,37 @@ public:
         
         
         
+    }*/
+    
+    
+    void getallcomb(vector<int> nums,int ind,vector<int> v,vector<vector<int>>& ans)
+    {
+        
+            if(ind==nums.size())
+            {
+                return;
+            }
+            
+            
+        
+        
+        for(int i=ind;i<nums.size();i++)
+        {
+            if(i>ind && nums[i]==nums[i-1])
+            {
+                continue;
+            }
+            
+            v.push_back(nums[i]);
+            getallcomb(nums,i+1,v,ans);
+            
+            ans.push_back(v);
+            v.pop_back();
+           
+            
+        }
+        
+        
     }
+    
 };
