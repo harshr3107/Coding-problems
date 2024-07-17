@@ -52,7 +52,10 @@ public:
         
        
         v.push_back(candidates[i]);
-        getcombi(candidates,i+1,target-candidates[i],v,ans);
+          target-=candidates[i];  
+        getcombi(candidates,i+1,target,v,ans);
+            target+=candidates[i];
+            
         v.pop_back();
        
         
