@@ -51,7 +51,8 @@ public:
             }
             if(candidates[i]>target)
             {
-                break;
+                //break;
+                return;
             }
         
        
