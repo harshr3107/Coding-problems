@@ -10,9 +10,40 @@
  */
 class Solution {
 public:
+    
+    
+  void reverselink(ListNode*& head,ListNode* cur,ListNode* prev)
+    {
+        
+        if(cur==NULL)
+        {
+            head=prev;
+            return;
+        }
+        
+        
+       
+        
+      reverselink(head,cur->next,cur);
+         cur->next=prev;
+        
+        
+    }
+    
+    
+    
     ListNode* reverseList(ListNode* head) {
         
-        if(head==NULL)
+        ListNode* cur = head;
+        ListNode* prev = NULL;
+        reverselink(head,cur,prev);
+        
+        
+        
+        
+        return head;
+        
+       /* if(head==NULL)
         {
             return head;
         }
@@ -34,7 +65,13 @@ public:
         
         q->next=p;
         
-        return q;
+        return q;*/
+        
+        
+        
+        
+        
+        
         
     }
 };
