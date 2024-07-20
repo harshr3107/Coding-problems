@@ -18,8 +18,8 @@ public:
             return false;
         }
          
-        slow=head->next;
-        fast=head->next->next;
+        slow=head;
+        fast=head->next;
         
         
         
