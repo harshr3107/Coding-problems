@@ -23,28 +23,17 @@ public:
         ListNode* l2= head->next;
         ListNode* temp = l2;
         
-        while(l1->next!=NULL && l2->next!=NULL)
+        while(l2!=NULL && l2->next!=NULL)
         {
             l1->next=l1->next->next;
             l2->next=l2->next->next;
-            l1=l1->next;
-            
-            if(l2->next==NULL)
-            {
-                break;
-            }
-            
+            l1=l1->next;   
             l2=l2->next;
         }
         
         
     
-        
-        if(l2->next!=NULL)
-        {
-            l2->next=l2->next->next;
-            
-        }
+    
         
         l1->next=temp;
         
