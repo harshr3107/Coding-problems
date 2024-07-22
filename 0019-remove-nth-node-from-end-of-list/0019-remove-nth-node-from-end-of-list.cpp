@@ -18,7 +18,42 @@ public:
         }
         
         
-        int length=0;
+        ListNode* temp = head;
+        ListNode* temp2 = head;
+        
+        int i=0;
+        
+        while(i!=n)
+        {
+            i++;
+            temp2=temp2->next;
+        }
+        
+       
+       /* if(temp2->next==NULL)
+        {
+            head=head->next;
+            return head;
+        }*/
+        
+        if(temp2==NULL)
+        {
+            head=head->next;
+            return head;
+        }
+        
+        
+        while(temp2->next!=NULL)
+        {
+            temp2=temp2->next;
+            temp=temp->next;
+        }
+        
+        temp->next=temp->next->next;
+        
+        return head;
+        
+      /*  int length=0;
         ListNode* temp = head;
         ListNode* temp2 = head->next;
         
@@ -51,6 +86,13 @@ public:
         delete(temp2);
         
         return head;
+        
+        */
+        
+        
+        
+        
+        
         
         
         
