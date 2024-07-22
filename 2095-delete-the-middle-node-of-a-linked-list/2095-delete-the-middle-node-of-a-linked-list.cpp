@@ -19,17 +19,20 @@ public:
             return head;
         }
         
+        ListNode* prev = new ListNode(0);
+        prev->next=head;
+        
         ListNode* slow=head;
         ListNode* fast=head;
         
         while(fast!=NULL && fast->next!=NULL)
         {
-            slow=slow->next;
+            prev=prev->next;
             fast=fast->next->next;
         }
         
         
-        return slow;
+        return prev;
         
         
     }
@@ -43,14 +46,7 @@ public:
         
         ListNode* mid = getmiddle(head);
         
-        ListNode* prev = head;
-        
-        while(prev->next!=mid)
-        {
-            prev=prev->next;
-        }
-        
-        prev->next=mid->next;
+      mid->next=mid->next->next;
         
         return head;
         
