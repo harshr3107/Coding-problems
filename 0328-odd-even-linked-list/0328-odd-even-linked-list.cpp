@@ -12,7 +12,48 @@ class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
         
-        ListNode* oddlist=NULL;
+        
+        
+        if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+        
+        ListNode* l1 = head;
+        ListNode* l2= head->next;
+        ListNode* temp = l2;
+        
+        while(l1->next!=NULL && l2->next!=NULL)
+        {
+            l1->next=l1->next->next;
+            l2->next=l2->next->next;
+            l1=l1->next;
+            
+            if(l2->next==NULL)
+            {
+                break;
+            }
+            
+            l2=l2->next;
+        }
+        
+        
+    
+        
+        if(l2->next!=NULL)
+        {
+            l2->next=l2->next->next;
+            
+        }
+        
+        l1->next=temp;
+        
+        
+        return head;
+        
+        
+        
+     /*   ListNode* oddlist=NULL;
         ListNode* tempe;
         ListNode* evenlist = NULL;
         ListNode* tempo;
@@ -75,7 +116,7 @@ public:
         tempo->next=evenlist;
         
         
-        return oddlist;
+        return oddlist;*/
         
         
         
