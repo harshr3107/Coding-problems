@@ -14,6 +14,7 @@ public:
             if(s.at(i)=='a' || s.at(i)=='i' || s.at(i)=='e' || s.at(i)=='o' || s.at(i)=='u')
             {
                   vowels++;
+                return true;
             }
 
 
@@ -23,13 +24,8 @@ public:
 
 
 
-        if(vowels==0)
-        {
-            return false;
-        }
-
-        return true;
-
+        
+        return false;
     }
 
 
