@@ -3,7 +3,6 @@ public:
     int minimumPushes(string word) {
         
         
-        sort(word.begin(),word.end());
         
         map<int,int> m1;
         map<char,int> m2;
