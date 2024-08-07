@@ -52,11 +52,11 @@ public:
         
         while(i>=0)
         {
-            cout<<"value of i is "<<i<<endl;
+           
             
             if((i-2)>=0)
             {
-                cout<<"i entered here-1\n";
+                
                 string  s = nums.substr(i-2,3);
                 cout<<s<<endl;
                 v.push_back(s);
@@ -65,17 +65,15 @@ public:
                 
             }else if((i-1)>=0)
             {
-                cout<<"i entered here - 2 \n";
+               
                 string  s = nums.substr(i-1,2);
-                cout<<s<<endl;
                 v.push_back(s);
                 i=i-2;
                 break;
             }else if(i==0)
             {
-                cout<<"i entered here -3\n";
+                
                 string  s = nums.substr(i,1);
-                cout<<s<<endl;
                 v.push_back(s);
                 i=i-1;
                 break;
@@ -134,7 +132,7 @@ public:
                 
                
                 
-                cout<<"value of s is "<<s<<endl;
+               
                 
                 v2.push_back(s);
                 
@@ -142,7 +140,7 @@ public:
                 
             }else if(n==2)
             {
-                cout<<"mai yaha aaya hoon\n";
+                
                 
                  if(v[i].at(0)!='0')
                 {
@@ -153,7 +151,7 @@ public:
                          
                      }else{
                          
-                         cout<<"hehehehehe\n";
+                        
                          a++;
                          s+=m3[v[i].at(1)];
                          
@@ -173,7 +171,7 @@ public:
                 }
                 
                  v2.push_back(s);
-                 cout<<"value of s is "<<s<<endl;
+                 
                 
                 
                 s="";
@@ -185,7 +183,6 @@ public:
                 s=s+m[v[i].at(0)];
                 s=s+" ";
                 v2.push_back(s);
-                cout<<s<<endl;
                 s="";
                 
             }else{
@@ -196,15 +193,14 @@ public:
         }
         
         
-        cout<<"size of the v2 is "<<v2.size()<<endl;
         
-        cout<<endl<<endl;
+        
         
         string ans="";
         
         for(int i=v2.size()-1;i>=0;i--)
         {
-            cout<<"value is "<<v2[i].length()<<" "<<endl;
+            
             if(v2[i].length()!=0)
             {
             
