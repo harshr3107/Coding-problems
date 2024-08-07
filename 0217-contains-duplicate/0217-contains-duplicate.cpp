@@ -3,6 +3,7 @@ public:
     bool containsDuplicate(vector<int>& nums) {
         
         map<int,int> mp;
+        sort(nums.begin(),nums.end());
         
         for(int i=0;i<nums.size();i++)
         {
