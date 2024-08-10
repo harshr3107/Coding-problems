@@ -31,15 +31,10 @@ public:
             }
             h = sum-target;
             
-            if(h<0)
-            {
-               // cout<<"i jjj\n";
-                continue;
-            }
-           
+            
             it = mp.lower_bound(h);
             
-            while(it!=mp.begin())
+            while(h>0 && it!=mp.begin())
             {
                 //cout<<"i entered here\n "<<it->first<<" "<<h<<endl;
                 
