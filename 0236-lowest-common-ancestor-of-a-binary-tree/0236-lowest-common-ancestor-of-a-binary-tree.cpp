@@ -37,11 +37,7 @@ int findnode(TreeNode* root,TreeNode* key,vector<TreeNode*>& a)
         return -1;
     }
     
-    if(root->left==NULL && root->right==NULL)
-    {
-        a.pop_back();
-        return 0;
-    }
+   
        
      
      cout<<"i entered here for "<<root->val<<endl;
