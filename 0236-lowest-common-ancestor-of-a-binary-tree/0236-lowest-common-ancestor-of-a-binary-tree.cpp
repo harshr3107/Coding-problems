@@ -21,7 +21,10 @@ int findnode(TreeNode* root,TreeNode* key,vector<TreeNode*>& a)
     
     if(root==NULL)
     {
+        if(!a.empty())
+        {
         a.pop_back();
+        }
         return 0;
         
     }
@@ -33,9 +36,15 @@ int findnode(TreeNode* root,TreeNode* key,vector<TreeNode*>& a)
         a.push_back(root);
         return -1;
     }
+    
+    if(root->left==NULL && root->right==NULL)
+    {
+        a.pop_back();
+        return 0;
+    }
        
      
-   // cout<<"i entered here for "<<root->val<<endl;
+     cout<<"i entered here for "<<root->val<<endl;
      a.push_back(root);
    
      if(findnode(root->left,key,a)==-1)
@@ -44,8 +53,10 @@ int findnode(TreeNode* root,TreeNode* key,vector<TreeNode*>& a)
          return -1;
      }
     
+        
    
-      a.push_back(root);
+    
+     a.push_back(root);
     
     if(findnode(root->right,key,a)==-1)
     {
