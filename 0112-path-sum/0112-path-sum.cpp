@@ -13,11 +13,13 @@ class Solution {
 public:
     
     int sum=0;
+    int a=0;
     
     bool hasPathSum(TreeNode* root, int targetsum) {
         
         if(root==NULL)
         {
+          
             return false;
         }
         
@@ -32,6 +34,7 @@ public:
         }
         
         sum+=root->val;
+        a++;
         if(hasPathSum(root->left,targetsum)==true)
         {
            return true; 
