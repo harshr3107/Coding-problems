@@ -23,7 +23,7 @@ public:
         }
     }
     
-    TreeNode* makebst(vector<int> v,int istart,int iend)
+    TreeNode* makebst(vector<int>& v,int istart,int iend)
     {
         if(istart>iend)
         {
