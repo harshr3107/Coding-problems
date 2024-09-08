@@ -30,7 +30,9 @@ public:
         for(int i=0;i<arr.size();i++)
         {
             
-          minheap.push(make_pair(arr[i],abs(x-arr[i])));
+            
+              minheap.push(make_pair(arr[i],abs(x-arr[i])));
+            
                 
         }
         
