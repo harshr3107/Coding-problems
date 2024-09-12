@@ -4,116 +4,111 @@ public:
     
     
     
-    bool solve(vector<vector<char>>& board,int row,int col,int cd,string word,vector<vector<bool>>& visited)
+   /* bool issafe(vector<vector<char>>& board,int row,int col,string word,int curindex,vector<vector<bool>> visited)
     {
-       
         
-       
-        
-        if(cd==word.length())
+        if(row<0 || row>=board.size() || col<0 || col>=board[row].size() || curindex>=word.length() || visited[row][col]==true)
         {
-    
+            return false;
+        }
+        
+        
+        if(board[row][col]==word[curindex])
+        {
             return true;
         }
         
-       if(row<0 || row>=board.size() || col<0 || col>=board[row].size() || word[cd]!=board[row][col] || visited[row][col]==true)
+        
+        return false;
+        
+        
+    }
+    */
+    
+    
+    
+    
+    bool checkforword(vector<vector<char>>& board,string word,int row,int col,vector<vector<bool>>& visited,int curindex)
+    {
+        //cout<<"i am here for "<<row<<" "<<col<<" the curindex is "<<curindex<<endl;
+        
+        if(curindex==word.length())
+        {
+            return true;
+        }
+        
+        
+        
+       if(row<0 || row>=board.size() || col<0 || col>=board[row].size() || word[curindex]!=board[row][col] || visited[row][col]==true)
        {
            return false;
-       }
+       } 
+        
+        visited[row][col]=true;
         
         
+        
+           if(checkforword(board,word,row+1,col,visited,curindex+1)==true)
+            {
+                return true;   
+            }
        
-       
-            //cout<<"\ni am here for "<<row<<" "<<col<<endl;
-            
-            visited[row][col]=true;
-            
-           
-            
-               
-                if(solve(board,row-1,col,cd+1,word,visited)==true)
-                {
-                    return true;
-                }
-                
-                
-                
-            
+            if(checkforword(board,word,row-1,col,visited,curindex+1)==true)
+            {
+               return true;   
+            }
         
-                if(solve(board,row+1,col,cd+1,word,visited)==true)
-                {
-                    return true;
-                }
-             
-               
         
-                 if(solve(board,row,col-1,cd+1,word,visited)==true)
-                 {
-                     return true;
-                 }
-                
-                
-                
-           
-           
-                 if(solve(board,row,col+1,cd+1,word,visited)==true)
-                 {
-                     return true;
-                 }
-            
+           if(checkforword(board,word,row,col+1,visited,curindex+1)==true)
+            {
+                return true;
+            }
+        
+        
+            if(checkforword(board,word,row,col-1,visited,curindex+1)==true)
+            {
+                return true;   
+            }
+        
+        
         visited[row][col]=false;
         
         return false;
         
     }
-        
-    
     
     
     bool exist(vector<vector<char>>& board, string word) {
         
         
-        if(board.size()==1 && board[0].size()==1)
-        {
-            if(word.at(0)!=board[0][0])
-            {
-                return false;
-            }
-        }
-        
-        
-        vector<vector<bool>> visited(board.size());
+        vector<vector<bool>> visited;
         
         for(int i=0;i<board.size();i++)
         {
-            for(int j=0;j<board[i].size();j++)
-            {
-                visited[i].push_back(false);
-            }
+            vector<bool> v(board[i].size(),false);
+            visited.push_back(v);
         }
         
-       
         for(int i=0;i<board.size();i++)
         {
             for(int j=0;j<board[i].size();j++)
             {
                 if(board[i][j]==word[0])
                 {
-                    cout<<"\ni entered here  for "<<i<<" "<<j<<endl;
-                    if(solve(board,i,j,0,word,visited)==true)
+                    //cout<<"i entered here for "<<i<<" "<<j<<endl;
+                    
+                    if(checkforword(board,word,i,j,visited,0)==true)
                     {
-                        cout<<"\ni entered here  for "<<i<<" "<<j<<endl;
                         return true;
                     }
                     
                 }
+                
             }
         }
         
-        
-        
-        
         return false;
+        
         
         
     }
