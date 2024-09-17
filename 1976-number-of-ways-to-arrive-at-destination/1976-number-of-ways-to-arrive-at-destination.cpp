@@ -1,4 +1,4 @@
-/*class Solution {
+class Solution {
 public:
     
     
@@ -13,7 +13,7 @@ public:
         
         //form the graph
         
-        vector<vector<pair<int,int>>> adj(n);
+        vector<vector<pair<long long,long long>>> adj(n);
         
         for(int i=0;i<roads.size();i++)
         {
@@ -22,19 +22,20 @@ public:
             int t = roads[i][2];
             
             adj[u].push_back(make_pair(v,t));
+            adj[v].push_back(make_pair(u,t));
             
         }
         //now this is a bidirectional graph with all weight positive the method would be using tropological sort
         
        //priority_queue<pair<long,long>,vector<pair<long,long>>,greater<pair<long,long>>> minheap;
         
-        set<pair<long,long>> s;
+        set<pair<long long,long long>> s;
         
         //time to reach,node
         
         s.insert(make_pair(0,0));
-        vector<long> time(n,LONG_MAX);
-        vector<int> ways(n);
+        vector<long long> time(n,LONG_MAX);
+        vector<long long> ways(n,0);
         time[0]=0;
         ways[0]=1;
         
@@ -44,15 +45,15 @@ public:
         {
             //cout<<"mai yaja jhoon\n";
             
-            long  timereq = (*s.begin()).first;
-            long  current = (*s.begin()).second;
+            long long  timereq = (*s.begin()).first;
+            long long  current = (*s.begin()).second;
             
-            cout<<timereq<<" "<<current<<endl;
+            //cout<<timereq<<" "<<current<<endl;
             
-             cout<<s.size()<<endl;
+             //cout<<s.size()<<endl;
             s.erase(s.begin());
             
-            cout<<s.size()<<endl;
+            //cout<<s.size()<<endl;
             
             
             for(int i=0;i<adj[current].size();i++)
@@ -66,11 +67,11 @@ public:
                 {
                     ways[nodechild]=(ways[nodechild]+ways[current])%mod;
                     
-                }else if(timereq+timechild<time[nodechild])
+                }else if((timereq+timechild)<time[nodechild])
                 {
-                    if(time[nodechild]!=LONG_MAX)
+                    if(s.count(make_pair(time[nodechild],nodechild)))
                     {
-                      s.erase(s.find(make_pair(time[adj[current][i].first],adj[current][i].first)));
+                      s.erase(s.find(make_pair(time[nodechild],nodechild)));
                     }
                     
                     time[nodechild]=timereq+timechild;
@@ -102,7 +103,9 @@ public:
         
         
     }
-};*/
+};
+
+/*
 
 class Solution {
 public:
@@ -161,3 +164,4 @@ public:
         return path[n-1]%M;
     }
 };
+*/
