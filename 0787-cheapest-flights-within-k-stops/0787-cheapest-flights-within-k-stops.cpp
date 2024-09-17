@@ -26,7 +26,7 @@ public:
         q.push(make_pair(src,make_pair(-1,0)));
         
         
-        set<int> s;
+       // set<int> s;
         
         
         while(!q.empty())
@@ -45,19 +45,19 @@ public:
             }
             
            
-            if(current==dst && stops<=k)
+           /* if(current==dst && stops<=k)
             {
                 //cout<<"i am entering here at price "<<price<<endl;
                 //ans.push_back(price);
                 s.insert(prices);
-            }
+            }*/
             
             //cout<<adj[current].size()<<endl;
             
             for(int i=0;i<adj[current].size();i++)
             {
                 //cout<<"yaha aayyyaa mai\n";
-                if(price[adj[current][i].first]>adj[current][i].second+prices)
+                if(price[adj[current][i].first]>adj[current][i].second+prices && stops+1<=k)
                 {
                     price[adj[current][i].first]=adj[current][i].second+prices;
                     q.push(make_pair(adj[current][i].first,make_pair(stops+1,adj[current][i].second+prices)));
@@ -68,12 +68,12 @@ public:
         }
         
         
-        if(s.empty())
+        if(price[dst]==INT_MAX)
         {
             return -1;
         }
         
-        return *s.begin();
+        return price[dst];
         
         
         
