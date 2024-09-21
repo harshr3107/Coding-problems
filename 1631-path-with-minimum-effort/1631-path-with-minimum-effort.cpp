@@ -131,16 +131,7 @@ public:
         }
         
         
-        for(int i=0;i<hdis.size();i++)
-        {
-            for(int j=0;j<hdis[i].size();j++)
-            {
-                cout<<hdis[i][j]<<" ";
-            }
-            
-            cout<<endl;
-            
-        }
+       
         
         
         
