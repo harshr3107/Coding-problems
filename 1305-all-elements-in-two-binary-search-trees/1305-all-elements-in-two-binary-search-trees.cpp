@@ -12,13 +12,13 @@
 class Solution {
 public:
     
-    void preorder(TreeNode*& root,multiset<int>& s)
+    void preorder(TreeNode*& root,priority_queue<int,vector<int>,greater<int>>& s)
     {
         if(root!=NULL)
         {
             preorder(root->left,s);
             preorder(root->right,s);
-            s.insert(root->val);
+            s.push(root->val);
             
         }
     }
@@ -26,12 +26,18 @@ public:
     
     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
         
-        multiset<int> s;
-        
+        //multiset<int> s;
+        priority_queue<int,vector<int>,greater<int>> s;
         preorder(root1,s);
         preorder(root2,s);
         
-        vector<int> v(s.begin(),s.end());
+       vector<int> v;
+        
+        while(!s.empty())
+        {
+            v.push_back(s.top());
+            s.pop();
+        }
         
         return v;
          
