@@ -11,19 +11,7 @@
 class Solution {
 public:
     
-    void display(ListNode* h)
-    {
-        ListNode* u =h;
-        
-        while(u!=NULL)
-        {
-            cout<<u->val<<" ";
-            u=u->next;
-        }
-        
-        cout<<endl;
-        
-    }
+   
     
     
     ListNode* reversee(ListNode* h)
