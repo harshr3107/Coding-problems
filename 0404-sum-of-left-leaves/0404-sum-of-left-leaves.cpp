@@ -31,7 +31,7 @@ public:
         if(root->left!=NULL && root->left->left==NULL && root->left->right==NULL)
         {
             
-                 return left+right+root->left->val;
+                 return right+root->left->val;
         }
         
         
