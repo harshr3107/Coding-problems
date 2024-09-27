@@ -1,64 +1,129 @@
 class Solution {
 public:
     
-    void dfs(int cur, unordered_map<int,vector<int>>& adj,unordered_map<int,bool>& vis)
+    
+    class disjoint_set
     {
-        vis[cur]=true;
         
-        for(auto it: adj[cur])
+        public:
+        
+        vector<int> size;
+        vector<int> parent;
+        
+        disjoint_set(int n)
         {
-            if(vis[it]!=true)
+            for(int i=0;i<=n;i++)
             {
-                dfs(it,adj,vis);
+                parent.push_back(i);
+                size.push_back(1);
             }
+            
         }
         
-    }
-    
-    
-    
+        
+        
+        int getparent(int u)
+        {
+            if(parent[u]==u)
+            {
+                return u;
+            }
+            
+            parent[u]=getparent(parent[u]);
+            return parent[u];
+            
+        }
+        
+        
+        void unionbysize(int u,int v)
+        {
+            int ulp_u = getparent(u);
+            int ulp_v = getparent(v);
+            
+            if(ulp_u==ulp_v)
+            {
+                return;
+            }
+            
+            if(size[ulp_v]>size[ulp_u])
+            {
+                parent[ulp_u]=ulp_v;
+                size[ulp_v]+=size[ulp_u];
+            }else{
+                
+                parent[ulp_v]=ulp_u;
+                size[ulp_u]+=size[ulp_v];
+                
+            }
+            
+            
+        }
+        
+        
+        
+        bool isconnect(int u,int v)
+        {
+            int ulp_u = getparent(u);
+            int ulp_v = getparent(v);
+            
+            if(ulp_u==ulp_v)
+            {
+                return true;
+            }
+            
+            
+            return false;
+            
+        }
+        
+        
+        
+    };
+   
     
     
     
     int removeStones(vector<vector<int>>& stones) {
         
-        //create a graph
+        int row = 0;
+        int col =0;
         
-        unordered_map<int,vector<int>> adj;
-        unordered_map<int,bool> vis;
+        for(auto it: stones)
+        {
+            row = max(row,it[0]);
+            col = max(col,it[1]);
+            
+        }
+        
+        disjoint_set* ds = new disjoint_set(row+col+1); 
         
         
         for(int i=0;i<stones.size();i++)
         {
-              int u = stones[i][0];
-              int v = stones[i][1];
+            int n1 = stones[i][0];
+            int n2 = row+stones[i][1]+1;
             
-               adj[u].push_back(v+10001);
-               adj[v+10001].push_back(u);
-              
-             
-        }
-        
-        int components=0;
-        
-        for(auto it : adj)
-        {
-            if(vis[it.first]==false)
+            if(ds->isconnect(n1,n2)==false)
             {
-                dfs(it.first,adj,vis);
-                components++;
-                
+                ds->unionbysize(n1,n2);
             }
-           
+            
         }
         
+        //we need to find number of components
         
+        int component=0;
+
+        for(int i=0;i<=(row+col+1);i++)
+        {
+            if(ds->parent[i]==i && ds->size[i]!=1)
+            {
+                component++;
+            }
+            
+        }
         
-        return stones.size()-components;
-        
-        
-        
-        
+        return stones.size()-component;
         
         
         
