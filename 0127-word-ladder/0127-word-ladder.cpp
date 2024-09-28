@@ -5,7 +5,7 @@ public:
         
         // this i did so that i can hace easy retrival from wordlist
         unordered_set<string> s(wordList.begin(),wordList.end());
-        unordered_map<string,bool> visited;
+        //unordered_map<string,bool> visited;
         
         
         if(s.find(endWord)==s.end())
@@ -15,7 +15,8 @@ public:
             return 0;
         }
         
-        visited[beginWord]=true;
+        //visited[beginWord]=true;
+        s.erase(beginWord);
         
        queue<pair<string,int>> q;
         
@@ -52,16 +53,12 @@ public:
                     int tp = temp.at(i);
                     temp.at(i)=ch;
                     
-                    if(visited[temp]==true)
-                    {
-                        temp.at(i)=tp;
-                        continue;
-                    }
+                    
                     
                     
                     if(s.find(temp)!=s.end())
                     {
-                        visited[temp]=true;
+                        s.erase(temp);
                         q.push(make_pair(temp,level+1));
                     }
                     
