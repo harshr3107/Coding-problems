@@ -40,12 +40,10 @@ public:
             }
             
             
-            char ch ='a';
-            int j=0;
             
-            while(j<26)
+            
+            for(char ch='a';ch<='z';ch++)
             {
-                //cout<<"i am the char "<<ch<<endl;
                 
                 for(int i=0;i<temp.length();i++)
                 {
@@ -72,10 +70,9 @@ public:
                     
                 }
                 
-                ch++;
-                j++;
-                
+               
             }
+            
             
             
             
