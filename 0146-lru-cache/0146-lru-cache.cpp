@@ -27,8 +27,8 @@ public:
     
     node* head;
     node* cur;
-    map<int,node*> mp1;
-    map<int,int> mp2;
+    unordered_map<int,node*> mp1;
+    unordered_map<int,int> mp2;
     int size;
     int csize;
     
