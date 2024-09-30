@@ -26,7 +26,7 @@ public:
     
     CustomStack(int maxSize) {
         
-        cout<<"size of the stack is "<<maxSize<<endl;
+        //cout<<"size of the stack is "<<maxSize<<endl;
         top=NULL;
         bottom=NULL;
         csize=0;
@@ -38,7 +38,7 @@ public:
     
     void push(int x) {
         
-        cout<<x<<" ko push kar rahe\n"; 
+        //cout<<x<<" ko push kar rahe\n"; 
         
         if(csize==size)
         {
@@ -49,7 +49,7 @@ public:
         
         if(csize==0)
         {
-            cout<<"mai yaha kuch bhi nahi waha enter hogaya\n";
+            //cout<<"mai yaha kuch bhi nahi waha enter hogaya\n";
             top=temp;
             bottom=temp;
             csize++;
@@ -73,7 +73,7 @@ public:
     int pop() {
         
         
-        cout<<"mai nikalne aaya\n";
+       // cout<<"mai nikalne aaya\n";
         
         if(csize==0)
         {
@@ -84,7 +84,7 @@ public:
         top=top->next;
         csize--;
         
-        cout<<d<<" ko nikal diya\n";
+        //cout<<d<<" ko nikal diya\n";
         
         //cout<<"naya top hai "<<top->data<<" "<<"naya bottom hai "<<bottom->data<<endl;
         
@@ -94,17 +94,7 @@ public:
     }
     
     
-    void display(node* d)
-    {
-        while(d!=NULL)
-        {
-            cout<<d->data<<" ";
-            d=d->next;
-        }
-        
-        cout<<endl;
-        
-    }
+    
     
     void increment(int k, int val) {
         
@@ -139,7 +129,7 @@ public:
         
        
         
-        display(top);
+        
         
     }
 };
