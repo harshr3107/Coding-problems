@@ -1,4 +1,4 @@
-/*class Solution {
+class Solution {
 public:
     int minSubarray(vector<int>& nums, int p) {
         
@@ -31,16 +31,13 @@ public:
                  
                   int t = (csum-tsum+p)%p;
                
-              if((nums[i]%p)==tsum)
-              {
-                  return 1;
-              }
+              
                
             
                if(mp.count(t))
                {
                   // cout<<"i entered here for "<<nums[i]<<" and val of t is "<<t<<endl;   
-                   mini = min(mini,static_cast<int>(i-(mp[t])));
+                   mini = min(mini,i-mp[t]);
                   
               }
             
@@ -53,19 +50,16 @@ public:
        
         
         
-        if(mini==INT_MAX)
-        {
-            return -1;
-        }
-        
-        return mini;
+        return (mini == INT_MAX || mini == nums.size()) ? -1 : mini;
+
         
         
         
         
     }
-};*/
+};
 
+/*
 class Solution {
 public:
     int minSubarray(vector<int>& nums, int p) {
@@ -107,3 +101,4 @@ public:
         return (mini == INT_MAX || mini == nums.size()) ? -1 : mini;
     }
 };
+*/
