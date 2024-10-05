@@ -1,73 +1,63 @@
 class Solution {
 public:
+    
+    
     bool checkInclusion(string s1, string s2) {
         
-        int num=0;
-        int cnum=0;
-        int s2len = s2.length();
-        int s1len = s1.length();
-        
-        for(int i=0;i<s1len;i++)
+        if(s1.length()>s2.length())
         {
-            num=num+(s1.at(i)-'a');
+            return false;
         }
         
-        //cout<<"value of num is "<<num<<endl;
+        
+        map<char,int> mp1;
+        map<char,int> mp2;
+        
+        for(int i=0;i<s1.length();i++)
+        {
+            mp1[s1.at(i)]++;
+            mp2[s2.at(i)]++;
+        }
+        
+        
+        
+          
+            
+       
         
         int i=0;
-        //sort(s1.begin(),s1.end());
+        int j=s1.length()-1;
         
-        while(i<(s2len-s1len+1))
+       
+        while(j<s2.length()-1)
         {
-            //cout<<"value of str is "<<h<<endl;
-            //sort(s1.begin(),s1.end());
-            //sort(h.begin(),h.end());
             
-            /*if(s1==h)
+            if(mp1==mp2)
             {
                 return true;
-            }*/
-            
-            //i++;
-            
-                
-           string h = s2.substr(i,s1len);  
-                
-            int j=0;
-            while(j<s1len)
-            {
-                cnum+=h.at(j)-'a';
-                j++;
             }
             
-           // cout<<"value of cnum is "<<cnum<<endl;
-            
-            if(cnum==num)
+            mp2[s2.at(i)]--;
+            if(mp2[s2.at(i)]==0)
             {
-                int j=0;
-                while(j<s1.length() && h.find(s1.at(j))<s1.length())
-                {
-                    j++;
-                }
-                
-                //cout<<"value of j is "<<j<<endl;
-                
-                if(j==s1len)
-                {
-                return true;
-                }
+                mp2.erase(s2.at(i));
             }
-            
-            cnum=0;
             i++;
+            j++;
             
+            mp2[s2.at(j)]++;
+            
+           
+            
+        }
+        
+        if(mp1==mp2)
+        {
+            return true;
         }
         
         
         return false;
-        
-        
-        
         
     }
 };
