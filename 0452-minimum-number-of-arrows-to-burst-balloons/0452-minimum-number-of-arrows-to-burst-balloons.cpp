@@ -30,8 +30,8 @@ public:
         
         for(int i=0;i<intervals.size();i++)
         {
-            cout<<intervals[i][0]<<" "<<intervals[i][1]<<endl;
-            cout<<"val of ans is "<<ans<<endl;
+           // cout<<intervals[i][0]<<" "<<intervals[i][1]<<endl;
+            //cout<<"val of ans is "<<ans<<endl;
             
             if(i!=0 && ((mini.first<=intervals[i][0] && mini.second>=intervals[i][0])) )
             {
