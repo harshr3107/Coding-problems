@@ -14,7 +14,7 @@ public:
             
             if(f[i][0]<=s[j][0])
             {
-                cout<<"i entered here 1\n";
+               // cout<<"i entered here 1\n";
                 
                 if(f[i][1]>=s[j][0])
                 {
@@ -33,7 +33,7 @@ public:
                 
             }else{
                 
-                cout<<"i entered here 2\n";
+                //cout<<"i entered here 2\n";
                 
                 if(s[j][1]>=f[i][0])
                 {
