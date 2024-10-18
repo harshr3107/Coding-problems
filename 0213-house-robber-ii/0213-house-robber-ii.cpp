@@ -2,7 +2,7 @@ class Solution {
 public:
     
     
- int getmax(vector<int>& nums,int cindex,vector<int>& dp)
+ /*int getmax(vector<int>& nums,int cindex,vector<int>& dp)
  {
      if(cindex>=nums.size())
      {
@@ -25,6 +25,42 @@ public:
      
      
      
+ }*/
+    
+    
+    int getmax(vector<int>& nums,vector<int>& dp)
+   {
+     
+        
+       dp[0]=nums[0];
+        
+        for(int i=1;i<nums.size();i++)
+        {
+            int left=nums[i];
+            int right = INT_MIN;
+            if(i>=2)
+            {
+                left = nums[i]+dp[i-2];
+               
+            }
+            
+             right = dp[i-1];
+            
+            dp[i] = max(left,right);
+            
+         
+        }
+        
+        return dp[nums.size()-1];
+        
+        
+     
+        
+        
+   
+     
+     
+     
  }
     
     
@@ -34,8 +70,16 @@ public:
     int rob(vector<int>& nums) {
         
         
+        if(nums.size()==1)
+        {
+            return nums[0];
+        }
+        
+        
         vector<int> v1;
         vector<int> v2;
+        
+        //convert it into tabular form
         
         
         for(int i=0;i<nums.size();i++)
@@ -59,11 +103,11 @@ public:
         
         vector<int> dp(nums.size(),-1);
         
-        int a = getmax(v1,0,dp);
+        int a = getmax(v1,dp);
         
         vector<int> dp2(nums.size(),-1);
         
-        int b = getmax(v2,0,dp2);
+        int b = getmax(v2,dp2);
         
         
         
