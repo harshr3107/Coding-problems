@@ -1,23 +1,53 @@
 class Solution {
 public:
- 
-   long long int jump(vector<int> &nums , int curr, int dest,vector<int> &dp)
-    {       
-            if(curr==dest) return 0;
-            if(dp[curr]!=-1) return dp[curr];
-            //cout<<curr<<" ";
-            long long int tmp=INT_MAX;
-     
-            for(int i=1;i<=nums[curr];i++)
-            {   if(i+curr>dest) break;
-                tmp=min(tmp,1+jump(nums,curr+i,dest,dp));  
-            }
-         dp[curr]=tmp;
-         return tmp;  
+    
+    
+   long long getjump(vector<int>& nums,int cindex,vector<int>& dp)
+    {
+        //cout<<"the cindex is "<<cindex<<endl;
+        
+        if(cindex>=(nums.size()-1))
+        {
+            return 0;
+        }
+        
+        
+       if(dp[cindex]!=-1)
+        {
+            return dp[cindex];
+        }
+        
+        long long ans=INT_MAX;
+        
+        for(int i=1;i<=nums[cindex];i++)
+        {
+            long long jump = 1+getjump(nums,cindex+i,dp);
+            ans=min(ans,jump);
+            
+        }
+            
+        dp[cindex]=ans;
+        
+        return dp[cindex];
+        
+        
+        
     }
     
+    
+    
+    
+    
     int jump(vector<int>& nums) {
-         vector<int> dp(nums.size(),-1);
-         return jump(nums,0,nums.size()-1,dp);
+        
+        int cindex=0;
+        vector<int> dp(nums.size()+1,-1);
+        
+        return getjump(nums,cindex,dp);
+        
+
+        
+        
+        
     }
 };
