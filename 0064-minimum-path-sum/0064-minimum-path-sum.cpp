@@ -2,10 +2,13 @@ class Solution {
 public:
     
     
-    int getsum(vector<vector<int>>& grid,int i,int j,int m,int n,vector<vector<int>>& dp)
+    //MEMONIZATION
+    /*
+    int getmini(vector<vector<int>>& grid,int i,int j,vector<vector<int>>& dp)
     {
+       
         
-        if(i==m-1 && j==n-1)
+        if(i==grid.size()-1 && j==grid[i].size()-1)
         {
             return grid[i][j];
         }
@@ -17,23 +20,78 @@ public:
         }
         
         
-        int left=INT_MAX;
         int right = INT_MAX;
+        int down = INT_MAX;
+       
         
-        if((i+1)<m)
+        //he can move right
+        
+        if((j+1)<grid[i].size())
         {
-            left=grid[i][j]+getsum(grid,i+1,j,m,n,dp);
+            right=grid[i][j]+getmini(grid,i,j+1,dp);
         }
         
-        if((j+1)<n)
+        //he can move down
+        
+        if((i+1)<grid.size())
         {
-            right=grid[i][j]+getsum(grid,i,j+1,m,n,dp);
+            down = grid[i][j]+getmini(grid,i+1,j,dp);
+        }
+       
+        dp[i][j]=min(right,down);
+  
+        return dp[i][j];
+        
+    }*/
+    
+    
+    //TABULATION
+    
+    int getmini(vector<vector<int>>& grid)
+    {
+        
+        vector<vector<int>> dp(grid.size(),vector<int>(grid[0].size(),0));
+        
+        
+        for(int i=0;i<grid.size();i++)
+        {
+            for(int j=0;j<grid[i].size();j++)
+            {
+                
+                if(i==0 && j==0)
+                {
+                    dp[i][j]=grid[i][j];
+                }else{
+                
+                int right = grid[i][j];
+                int down = grid[i][j];
+                
+                if((i-1)>=0)
+                {
+                    right+=dp[i-1][j];
+                }else{
+                    right+=1e9+7;
+                }
+                    
+                    if((j-1)>=0)
+                    {
+                        down+=dp[i][j-1];
+                    }else{
+                        down+=1e9+7;
+                    }
+                
+                    
+                    dp[i][j]=min(right,down);
+                
+                    
+                    }
+                
+            }
+            
         }
         
-        dp[i][j]=min(left,right);
-        return min(left,right);
         
-        
+        return dp[grid.size()-1][grid[0].size()-1];
         
     }
     
@@ -42,26 +100,16 @@ public:
     
     
     
-    
-    
     int minPathSum(vector<vector<int>>& grid) {
         
-        int i=0;
-        int j=0;
-        int m=grid.size();
-        int n=grid[0].size();
         
-        vector<vector<int>> dp;
+       // vector<vector<int>> dp(grid.size(),vector<int> v(grid[0].size(),-1));
+       vector<vector<int>> dp(grid.size(), vector<int>(grid[0].size(), -1));
+
+        return getmini(grid);
         
-        for(int i=0;i<m;i++)
-        {
-            vector<int> v(n,-1);
-            dp.push_back(v);
-        }
-        
-        
-        
-        return getsum(grid,i,j,m,n,dp);
+        //return getmini(grid,0,0,dp);
+      
         
     }
 };
