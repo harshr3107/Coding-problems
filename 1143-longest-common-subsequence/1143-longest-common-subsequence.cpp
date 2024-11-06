@@ -1,6 +1,8 @@
 class Solution {
 public:
     
+    /*
+    
     int getlongest(string& t1,string& t2,int ind1,int ind2,vector<vector<int>>& dp)
     {
         if(ind1<0 || ind2<0)
@@ -44,18 +46,50 @@ public:
     }
     
     
+    */
+    
+    
+    
     
     
     
     
     int longestCommonSubsequence(string t1, string t2) {
         
-        int ind1=t1.size()-1;
-        int ind2 = t2.size()-1;
+        int ind1=t1.size();
+        int ind2 = t2.size();
         
-        vector<vector<int>> dp(ind1+1,vector<int>(ind2+1,-1));
+        vector<vector<int>> dp(ind1+1,vector<int>(ind2+1,0));
         
-        return getlongest(t1,t2,ind1,ind2,dp);
+        
+        
+        for(int i=1;i<=ind1;i++)
+        {
+            
+            for(int j=1;j<=ind2;j++)
+            {
+                if(t1.at(i-1)==t2.at(j-1))
+                {
+                    dp[i][j]=1+dp[i-1][j-1];
+                    continue;
+                }
+                
+                int f = dp[i-1][j];
+                int s = dp[i][j-1];
+                
+                
+                dp[i][j] = max(f,s);
+                
+                
+            }
+            
+        }
+        
+      
+        return dp[ind1][ind2];
+        
+        
+        //return getlongest(t1,t2,ind1,ind2,dp);
         
         
     }
