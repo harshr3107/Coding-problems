@@ -1,19 +1,13 @@
-/*class Solution {
+class Solution {
 public:
     
     
-    int getlongest(string s,int ind1,int ind2,vector<vector<int>>& dp)
+   /* int getlongest(string s,int ind1,int ind2,vector<vector<int>>& dp)
     {
         
-        
-        if(ind2<ind1)
+        if(ind1>ind2)
         {
             return 0;
-        }
-        
-        if(ind2==ind1)
-        {
-            return 1;
         }
         
         
@@ -22,73 +16,84 @@ public:
             return dp[ind1][ind2];
         }
         
+        
+        if(ind1==ind2)
+        {
+            return 1+getlongest(s,ind1+1,ind2-1,dp);
+            
+        }
+        
+        
+        
+        
         if(s.at(ind1)==s.at(ind2))
         {
-            dp[ind1][ind2]=2+getlongest(s,ind1+1,ind2-1,dp);
-            return dp[ind1][ind2];
+            return 2+getlongest(s,ind1+1,ind2-1,dp);
         }
         
+        int takeleft = getlongest(s,ind1+1,ind2,dp);
+        int takeright = getlongest(s,ind1,ind2-1,dp);
         
-        int moveright=0;
-            if(ind1+1<=ind2)
-            {
-              moveright = getlongest(s,ind1+1,ind2,dp);
-            }
-        int moveleft=0;
-        if(ind2-1>=ind1)
+        dp[ind1][ind2]=max(takeleft,takeright);
+        
+        return dp[ind1][ind2];        
+        
+    }
+    
+    */
+    
+    
+    
+    
+    int longestPalindromeSubseq(string s) {
+        
+        if(s.length()==1)
         {
-           moveleft = getlongest(s,ind1,ind2-1,dp);
+            return 1;
         }
+     
         
+       
         
-        dp[ind1][ind2] = max(moveright,moveleft);
+        vector<vector<int>> dp(s.length()+2,vector<int>(s.length()+2,0)); 
         
-        return dp[ind1][ind2];
+        int ans=0;
         
-        
-        
-    }
-    
-    
-    
-    
-    int longestPalindromeSubseq(string s) {
-        
-        int ind1 = 0;
-        int ind2 = s.length()-1;
-        
-        vector<vector<int>> dp(s.length()+1,vector<int>(s.length()+1,-1));
-        
-        
-        return getlongest(s,ind1,ind2,dp);
-        
-    }
-};*/
-
-class Solution {
-public:
-    int longestPalindromeSubseq(string s) {
-        int n = s.size();
-        vector<vector<int>> dp(n, vector<int>(n, 0));
-        
-        // Base case: single characters are palindromic of length 1
-        for (int i = 0; i < n; i++) {
-            dp[i][i] = 1;
-        }
-        
-        // Fill the table bottom-up
-        for (int len = 2; len <= n; len++) {  // Length of substring
-            for (int i = 0; i <= n - len; i++) {
-                int j = i + len - 1;
-                if (s[i] == s[j]) {
-                    dp[i][j] = 2 + dp[i + 1][j - 1];
-                } else {
-                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
+        for(int i=1;i<=s.length();i++)
+        {
+            for(int j=s.length();j>=i;j--)
+            {
+                if(i==j)
+                {
+                    //cout<<"mai yaha aaya \n";
+                    dp[i][j]=1+dp[i-1][j+1];
+                     ans=max(ans,dp[i][j]);
+                    continue;
                 }
+                
+                if(s.at(i-1)==s.at(j-1))
+                {
+                    dp[i][j]=2+dp[i-1][j+1]; 
+                    ans=max(ans,dp[i][j]);
+                    continue;
+                }
+                
+                int a = dp[i-1][j];
+                int b = dp[i][j+1];
+                
+                dp[i][j]=max(a,b);
+                
+                
+                
+                
+                
             }
+            
+            
         }
+            
         
-        // The result is in dp[0][n - 1]
-        return dp[0][n - 1];
+        return ans;
+       
     }
 };
