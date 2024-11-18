@@ -10,109 +10,103 @@
 class Solution {
 public:
     
-    void createmapping(TreeNode* root,map<TreeNode*,TreeNode*>& mp)
+    
+    void getparentmapping(TreeNode* root,map<int,TreeNode*>& mp)
     {
         
         queue<TreeNode*> q;
-         mp[root]=NULL;
-        
         q.push(root);
+       
         
+        //cout<<"i entered here\n";
         
         while(!q.empty())
         {
             TreeNode* temp = q.front();
             q.pop();
             
+           // cout<<"i am here for "<<temp->val<<endl;
+            
+             
             if(temp->left!=NULL)
             {
-                mp[temp->left]=temp;
+                mp[temp->left->val]=temp;
+                
                 q.push(temp->left);
+                
             }
             
             if(temp->right!=NULL)
             {
-                mp[temp->right]=temp;
+                mp[temp->right->val]=temp;
                 q.push(temp->right);
             }
             
+            
         }
         
+        //cout<<"i came outside\n";
         
     }
     
     
     
-    void getatdistance(TreeNode* root,int k,vector<int>& v,map<TreeNode*,bool>& visited,int a)
+    void getallans(TreeNode* target, map<int,TreeNode*>& parentnode,int k,vector<int>& v)
     {
         
+        int sec=0;
         
-        if(root==NULL)
-        {
-            return;
-        }
+        queue<pair<TreeNode*,int>> q;
         
-       
-        
-        if(a==k && visited[root]==false)
-        {
-            //cout<<"value is "<<root->val<<endl;
-            v.push_back(root->val);
-            visited[root]=true;
-            return;
-        }
-        
-         visited[root]=true;
-        
-        getatdistance(root->left,k,v,visited,a+1);
-        getatdistance(root->right,k,v,visited,a+1);
-        
-        
-       
-        
-    }
-    
-    
-    
-    void getnodesatk(TreeNode* root,TreeNode* target,vector<int>& v,map<TreeNode*,TreeNode*> mp,int k)
-    {
+        q.push(make_pair(target,0));
         
         map<TreeNode*,bool> visited;
         
-        //visited[target]=true;
+        visited[target]=true;
         
-             if(k==0)
-            {
-                v.push_back(target->val);
-            }
-        
-        
-        while(k!=0)
+        while(!q.empty())
         {
-            //cout<<"i enter the loop for "<<target->val<<endl;
-            //cout<<"value of k here is "<<k<<endl<<endl;
+           pair<TreeNode*,int> temp = q.front();
+           q.pop();
+           int time = temp.second;
+           TreeNode* cnode = temp.first;
+            
+           // cout<<"the node "<<cnode->val<<" time "<<time<<endl;
+            
            
-            int a=0;
-            getatdistance(target,k,v,visited,a);
-            visited[target]=true;
-            
-            target=mp[target];
-            if(target==NULL)
+            if(time==k)
             {
-                break;
+                //cout<<"i am here for "<<cnode->val<<endl;
+                v.push_back(cnode->val);
+                continue;
             }
             
-            k=k-1;
-            if(k==0)
+            
+            if(cnode->left!=NULL && visited[cnode->left]!=true && time+1<=k)
             {
-                v.push_back(target->val);
+                 q.push(make_pair(cnode->left,time+1));  
+                 visited[cnode->left]=true;
+                     
             }
+            
+            if(cnode->right!=NULL && visited[cnode->right]!=true && time+1<=k)
+            {
+                q.push(make_pair(cnode->right,time+1));   
+                visited[cnode->right]=true;
+            }
+            
+            if(parentnode.count(cnode->val) && visited[parentnode[cnode->val]]!=true && time+1<=k)
+            {
+                q.push(make_pair(parentnode[cnode->val],time+1));   
+                visited[parentnode[cnode->val]]=true;
+                
+            }
+            
+            
             
             
             
         }
-        
-        
         
         
     }
@@ -122,15 +116,14 @@ public:
     
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
         
-        map<TreeNode*,TreeNode*> mp;
-        createmapping(root,mp);
+        map<int,TreeNode*> parentnode;
         
+        getparentmapping(root,parentnode);
+        vector<int> v;
         
-       vector<int> v;
-        
-        getnodesatk(root,target,v,mp,k);
-        
+        getallans(target,parentnode,k,v);
         
         return v;
+        
     }
 };
