@@ -16,7 +16,7 @@ public:
         while(i<=nums.size()-k)
         {
             
-            cout<<"value of i ans j is "<<i<<" "<<j<<endl;
+            //cout<<"value of i ans j is "<<i<<" "<<j<<endl;
             
             
             while(j<nums.size() && a!=k)
@@ -46,9 +46,9 @@ public:
                 
             }
             
-            cout<<"value of i ans j is "<<i<<" "<<j<<endl;
-            cout<<"sum is "<<csum<<endl;
-            cout<<"val of h is "<<h<<endl<<endl;
+            //cout<<"value of i ans j is "<<i<<" "<<j<<endl;
+            //cout<<"sum is "<<csum<<endl;
+            //cout<<"val of h is "<<h<<endl<<endl;
             if(h==k)
             {
                 ans=max(ans,csum);
