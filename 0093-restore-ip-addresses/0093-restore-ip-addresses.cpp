@@ -42,7 +42,7 @@ public:
                 
                     if((h.length()>=1 && h.at(0)=='0'))
                     {
-                        continue;
+                        return;
                     }
                 
                 
