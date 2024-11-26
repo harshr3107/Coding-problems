@@ -47,7 +47,7 @@ public:
     
     int minDistance(string w1, string w2) {
         
-         vector<vector<int>>  dp(w1.length()+1,vector<int>(w2.length()+1,-1));
+         /*vector<vector<int>>  dp(w1.length()+1,vector<int>(w2.length()+1,-1));
         
         if(w1.length()==0)
         {
@@ -57,75 +57,48 @@ public:
         
             
         
-        return getminways(w1,w2,0,0,dp);
-        
-       /* vector<vector<int>>  dp(w1.length()+1,vector<int>(w2.length()+1,0));
+        return getminways(w1,w2,0,0,dp);*/
         
         
-        for(int i=1;i<=w1.size();i++)
+        vector<vector<int>>  dp(w1.length()+1,vector<int>(w2.length()+1,-1));
+        
+        for(int i=0;i<=w1.length();i++)
         {
-            for(int j=1;j<=w2.size();j++)
+            dp[i][0]=i;
+        }
+        
+        for(int j=0;j<=w2.length();j++)
+        {
+            dp[0][j]=j;
+        }
+        
+        for(int i=1;i<=w1.length();i++)
+        {
+            for(int j=1;j<=w2.length();j++)
             {
                 
-                if(w1.at(i-1)==w2.at(j-1))
+                int bway=INT_MAX;
+                
+                if(w1[i-1]==w2[j-1])
                 {
-                    dp[i][j]=1+dp[i-1][j-1];
-                    continue;
+                    bway=dp[i-1][j-1];
                 }
                 
+                 int iway = 1+dp[i][j-1];
+                 int rway = 1+dp[i-1][j-1];
+                 int dway = 1+dp[i-1][j];
+        
+            dp[i][j] = min(min(bway,iway),min(rway,dway));
                 
-                dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+                
+                
+                
                 
             }
             
         }
         
-        cout<<dp[w1.size()][w2.size()]<<endl;
-        
-        
-        string s="";
-        
-        
-       int i=w1.size();
-       int j=w2.size();
-        
-        while(i>0 && j>0)
-        {
-            
-            if(w1.at(i-1)==w2.at(j-1))
-            {
-                s.push_back(w1.at(i-1));
-                i--;
-                j--;
-                continue;
-            }
-            
-            if(dp[i-1][j]>dp[i][j-1])
-            {
-                i--;
-            }else{
-                
-                j--;
-            }
-            
-            
-        }
-            
-        reverse(s.begin(),s.end());
-        cout<<s<<endl;
-        
-        
-        int ans=0;
-        
-        
-        
-    
-     
-        
-
-        
-        
-        return 0;
-        */
+        return dp[w1.length()][w2.length()];
+       
     }
 };
