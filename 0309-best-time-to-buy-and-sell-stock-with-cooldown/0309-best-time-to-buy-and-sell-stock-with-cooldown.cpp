@@ -57,7 +57,9 @@ public:
         return getmaxprofit(prices,index,buy,dp);*/
         
         
-        vector<vector<int>> dp(prices.size()+2,vector<int>(2,0));
+        vector<int> ahead(2,0);
+        vector<int> ahead2(2,0);
+         vector<int> current(2,0);
         int n = prices.size();
         
         for(int index=n-1;index>=0;index--)
@@ -70,8 +72,8 @@ public:
         if(buy)
         {
             
-            int price1 = -prices[index]+dp[index+1][0];
-            int price2 = dp[index+1][1];
+            int price1 = -prices[index]+ahead[0];
+            int price2 = ahead[1];
             
             profit = max(price1,price2);
             
@@ -80,18 +82,21 @@ public:
             
             
             
-            int price1 = prices[index]+dp[index+2][1];
-            int price2 = dp[index+1][0];
+            int price1 = prices[index]+ahead2[1];
+            int price2 = ahead[0];
             
             profit = max(price1,price2);
             
         }
         
-              dp[index][buy]=profit;
+              current[buy]=profit;
                 
                 
                 
-            }    
+            }
+            
+            ahead2 = ahead;
+            ahead = current;
 
 
             
@@ -99,7 +104,7 @@ public:
             
         }
         
-        return dp[0][1];
+        return ahead[1];
         
         
         
