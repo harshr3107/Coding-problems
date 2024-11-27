@@ -1,35 +1,49 @@
-/*class Solution {
+class Solution {
 public:
     
     
-    int getprofit(vector<int>& prices,int i,int csi,vector<vector<int>>& dp)
+    int getmax(vector<int>& prices,int index,bool buy,vector<vector<int>>& dp)
     {
         
-        if(i<0)
+        if(index>=prices.size())
         {
             return 0;
         }
         
-        if(dp[i][csi]!=-1)
+        
+        if(dp[index][buy]!=-1)
         {
-            return dp[i][csi];
+            return dp[index][buy];
         }
         
-        
-        int keep = getprofit(prices,i-1,csi,dp);
-        
-        
-        int sell = 0;
-        if(prices[i]<=prices[csi])
+        int profit=0;
+        if(buy)
         {
-            sell = (prices[csi]-prices[i])+getprofit(prices,i-1,i,dp);
+            //buy karle
+            int price1 = -prices[index]+getmax(prices,index+1,false,dp);
+            //ignore karle
+            int price2 = getmax(prices,index+1,true,dp);
+            
+            profit = max(price1,price2);
+            
+            
         }else{
             
-            sell = getprofit(prices,i-1,i,dp);
+            //sell karle
+            
+            int price1 = prices[index]+getmax(prices,index+1,true,dp);
+            
+            //ignore karle
+            
+            int price2 = getmax(prices,index+1,false,dp);
+            
+            profit = max(price1,price2);
+            
         }
         
-        dp[i][csi]=max(keep,sell);
-        return dp[i][csi];
+        dp[index][buy]=profit;
+        
+        return dp[index][buy];
         
         
     }
@@ -38,73 +52,49 @@ public:
     
     
     
+    
     int maxProfit(vector<int>& prices) {
         
-        int i=prices.size()-2;
-        int csi = i+1;
-        int maxi = *max_element(prices.begin(),prices.end());
+        vector<vector<int>> dp(prices.size()+1,vector<int>(2,-1));
         
+        int index=0;
+        int buy=0;
         
-       vector<vector<int>> dp(prices.size()+1,vector<int>(prices.size()+1,-1));
+        return getmax(prices,0,true,dp);
         
-        
-        return getprofit(prices,i,csi,dp);
-        
-        
-        //Tabulation
-        
-        vector<vector<int>> dp(prices.size()+1,vector<int>(prices.size()+1,0));
-        int csi=0;
-        
-        
-        for(int i=1;i<=prices.size();i++)
-        {
-            for(int j=1;j<=prices.size();j++)
-            {
-                
-                int keep = dp[i-1][j];
-        
-        
-                      int sell = 0;
-                    if(prices[i]<=prices[j])
-                     {
-                        sell = (prices[j]-prices[i])+dp[i-1][i];
-                      }else{
-            
-                          sell =dp[i-1][i];
-                     }
-        
-                       dp[i][j]=max(keep,sell);
-                
-               }
-            
-            
-        }
-        
-        
-        return dp[prices.size()][prices.size()];
-        
-        
-        
-        
-        
-    }
-};*/
-
-class Solution {
-public:
-    int maxProfit(vector<int>& prices) {
-        int n = prices.size();
-        if (n <= 1) return 0;
-
-        int maxProfit = 0;
-
-        for (int i = 1; i < n; ++i) {
-            if (prices[i] > prices[i - 1]) {
-                maxProfit += prices[i] - prices[i - 1];
-            }
-        }
-
-        return maxProfit;
     }
 };
+/*
+class Solution {
+private:
+    
+    int solveMem(vector<int>& prices,int index,int buy,vector<vector<int>> &dp)
+    {
+             if(index==prices.size()) return 0;
+             int profit=0;
+
+             if(dp[index][buy]!=-1) return dp[index][buy];
+
+             if(buy)
+             {
+                int buykaro=-prices[index]+solveMem(prices,index+1,0,dp);
+                int skipkaro=0+solveMem(prices,index+1,1,dp);
+                 profit=max(buykaro,skipkaro);
+             }else
+             {
+                int sellkaro=+prices[index]+solveMem(prices,index,1,dp);
+                int ignorekaro=0+solveMem(prices,index+1,0,dp);
+                profit=max(sellkaro,ignorekaro);
+             }
+             return dp[index][buy]=profit;
+    }  
+
+ 
+public:
+    int maxProfit(vector<int>& prices) {
+         int n=prices.size();
+         vector<vector<int>> dp(n+1,vector<int>(2,-1));
+         return solveMem(prices,0,1,dp);
+    }
+};
+*/
