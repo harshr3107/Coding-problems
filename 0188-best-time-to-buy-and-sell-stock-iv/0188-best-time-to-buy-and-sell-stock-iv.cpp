@@ -60,8 +60,12 @@ public:
         int ctrans=0;
         return getmax(prices,index,ctrans,k,dp);*/
         
-        //
-        int h = k*2;
+        
+        
+        //TABULATION
+        
+        
+        /*int h = k*2;
         vector<vector<int>> dp(prices.size()+1,vector<int>(h+1,0));
         int n = prices.size();
         
@@ -102,7 +106,55 @@ public:
             
         }
         
-        return dp[0][0];
+        return dp[0][0];*/
+        
+        
+        int h = k*2;
+        vector<int> ahead (h+1,0);
+        vector<int> current (h+1,0);
+        
+        int n = prices.size();
+        
+        for(int index=n-1;index>=0;index--)
+        {
+            for(int ctrans=h-1;ctrans>=0;ctrans--)
+            {
+                int profit=0;
+                
+                if((ctrans&1)==0)
+               {
+           
+            //buy
+            
+            int price1 = -prices[index]+ahead[ctrans+1];
+            int price2 = ahead[ctrans];
+            
+            profit = max(price1,price2);
+            
+        }else{
+            
+            
+            
+            int price1 = prices[index]+ahead[ctrans+1];
+            int price2 = ahead[ctrans];
+            
+            profit = max(price1,price2);
+            
+            
+        }
+        
+        current[ctrans]=profit;
+                
+                
+                
+            }
+            
+            ahead=current;
+            
+            
+        }
+        
+        return ahead[0];
         
         
     }
