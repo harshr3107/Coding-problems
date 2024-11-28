@@ -58,6 +58,7 @@ public:
         
         //Tabulation
         
+        /*
         vector<vector<int>> dp(prices.size()+1,vector<int>(3,0));
         
         int n = prices.size();
@@ -97,6 +98,51 @@ public:
         
         return dp[0][1];
         
+        */
+        
+        
+        //optimize the problem
+        
+        vector<int> ahead(3,0);
+        vector<int> current(3,0);
+        
+        int n = prices.size();
+        
+        for(int index=n-1;index>=0;index--)
+        {
+            
+            for(int buy=0;buy<=1;buy++)
+            {
+                
+                 int profit=0;
+        
+        if(buy)
+        {
+            int price1 = -prices[index]+ahead[0];
+            int price2 = ahead[1];
+            
+            profit = max(price1,price2);
+            
+        }else{
+            
+            int price1 = prices[index]+ahead[1];
+            int price2 = ahead[0];
+            
+            profit = max(price1-fee,price2);
+            
+            
+        }
+        
+        current[buy]=profit;
+                
+        }
+            
+            ahead=current;
+            
+        }
+        
+        
+        return current[1];
         
         
         
