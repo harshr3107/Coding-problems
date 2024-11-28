@@ -92,7 +92,7 @@ public:
         
         //Tabulation
 
-        
+        /*
         int n = nums.size();
         vector<vector<int>> dp(nums.size()+1,vector<int>(nums.size()+1,0));
         int ans=INT_MIN;
@@ -118,7 +118,41 @@ public:
        
         }
         
+        return ans;*/
+        
+        int n = nums.size();
+        vector<int> ahead (nums.size()+1,0);
+        vector<int> current (nums.size()+1,0);
+        int ans=INT_MIN;
+        
+        for(int index=n-1;index>=0;index--)
+        {
+            
+            for(int lastind=n;lastind>=0;lastind--)
+            {
+                 int take=0;
+        
+               if(lastind==n || nums[lastind]<nums[index])
+              {
+                 take = 1+ahead[index];
+              }
+        
+                int nottake = ahead[lastind];
+        
+        
+         current[lastind]=max(take,nottake);
+                ans=max(ans,current[lastind]);
+            }
+            
+            ahead=current;
+       
+        }
+        
         return ans;
+        
+        
+        
+        
     }
 };
 
