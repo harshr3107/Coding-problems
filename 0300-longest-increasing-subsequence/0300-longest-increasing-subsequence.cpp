@@ -80,6 +80,7 @@ public:
         return getmaxseq(nums,index,lastind,dp);
         */
         
+        /*
          int index=nums.size()-1;
         int lastind = nums.size();
         
@@ -87,9 +88,65 @@ public:
         
         return getmaxseq(nums,index,lastind,dp);
         
+        */
+        
+        //Tabulation
+
+        
+        int n = nums.size();
+        vector<vector<int>> dp(nums.size()+1,vector<int>(nums.size()+1,0));
+        int ans=INT_MIN;
+        
+        for(int index=n-1;index>=0;index--)
+        {
+            
+            for(int lastind=n;lastind>=0;lastind--)
+            {
+                 int take=0;
+        
+               if(lastind==n || nums[lastind]<nums[index])
+              {
+                 take = 1+dp[index+1][index];
+              }
+        
+                int nottake = dp[index+1][lastind];
         
         
-     
+          dp[index][lastind]=max(take,nottake);
+                ans=max(ans,dp[index][lastind]);
+            }
+       
+        }
         
+        return ans;
     }
 };
+
+/*
+int lengthOfLIS(vector<int>& nums) {
+    int n = nums.size();
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0)); // DP table with dimensions (n+1)x(n+1)
+
+    // Tabulation
+    for (int index = 0; index < n; index++) {
+        for (int lastind = 0; lastind <= n; lastind++) {
+            // Choice 1: Take the current number if it forms an increasing subsequence
+            int take = 0;
+            if (lastind == n || nums[index] > nums[lastind]) {
+                take = 1 + dp[index + 1][index];
+            }
+
+            // Choice 2: Skip the current number
+            int nottake = dp[index + 1][lastind];
+
+            // Maximize the result
+            dp[index][lastind] = max(take, nottake);
+        }
+    }
+
+    // The answer is stored in dp[0][n], considering no element is initially picked
+    return dp[0][n];
+}
+
+
+*/
