@@ -141,14 +141,14 @@ public:
         
         
          current[lastind]=max(take,nottake);
-                ans=max(ans,current[lastind]);
+                
             }
             
             ahead=current;
        
         }
         
-        return ans;
+        return current[n];
         
         
         
