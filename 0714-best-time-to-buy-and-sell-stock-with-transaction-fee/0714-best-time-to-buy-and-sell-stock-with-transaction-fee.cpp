@@ -1,13 +1,16 @@
 class Solution {
 public:
     
-    int getmax(vector<int>& prices,int index,int fee,bool buy,vector<vector<int>>& dp)
+    
+    int getmax(vector<int>& prices,int index,bool buy,int fee,vector<vector<int>>& dp)
     {
         
-        if(index>=prices.size())
+        
+        if(index==prices.size())
         {
             return 0;
         }
+        
         
         if(dp[index][buy]!=-1)
         {
@@ -18,18 +21,18 @@ public:
         
         if(buy)
         {
-            int price1 = -prices[index]+getmax(prices,index+1,fee,false,dp);
-            int price2 = getmax(prices,index+1,fee,true,dp);
-                
-            profit = max(price1,price2);
+            int price1 = -prices[index]+getmax(prices,index+1,false,fee,dp);
+            int price2 = getmax(prices,index+1,true,fee,dp);
             
+            profit = max(price1,price2);
             
         }else{
             
-            int price1 = prices[index]+getmax(prices,index+1,fee,true,dp);
-            int price2 = getmax(prices,index+1,fee,false,dp);
+            int price1 = prices[index]+getmax(prices,index+1,true,fee,dp);
+            int price2 = getmax(prices,index+1,false,fee,dp);
             
-              profit = max(price1-fee,price2);
+            profit = max(price1-fee,price2);
+            
             
         }
         
@@ -37,23 +40,20 @@ public:
         return profit;
         
         
+        
     }
-    
-    
-    
     
     
     
     
     int maxProfit(vector<int>& prices, int fee) {
         
+        
+      vector<vector<int>> dp(prices.size()+1,vector<int>(2,-1));
         int index=0;
-        bool buy = true;
+        bool buy=true;
         
-        vector<vector<int>> dp(prices.size(),vector<int>(2,-1));
-        
-        
-        return getmax(prices,index,fee,buy,dp);
+        return getmax(prices,index,buy,fee,dp);
         
         
     }
