@@ -12,40 +12,48 @@
 class Solution {
 public:
     
-    int sum=0;
-    int a=0;
-    
-    bool hasPathSum(TreeNode* root, int targetsum) {
-        
+    bool haspath(TreeNode* root,int targetsum)
+    {
         if(root==NULL)
         {
-          
             return false;
         }
         
         if(root->left==NULL && root->right==NULL)
         {
-            if(sum+root->val==targetsum)
+            if(targetsum-root->val==0)
             {
                 return true;
             }
             
+            
             return false;
+
         }
         
-        sum+=root->val;
-        a++;
-        if(hasPathSum(root->left,targetsum)==true)
-        {
-           return true; 
-        }
-        if(hasPathSum(root->right,targetsum)==true)
+        
+        if(haspath(root->left,targetsum-root->val)==true)
         {
             return true;
         }
-        sum-=root->val;
+        
+        
+        if(haspath(root->right,targetsum-root->val)==true)
+        {
+            return true;
+        }
         
         return false;
+        
+        
+        
+    }
+    
+    
+    
+    bool hasPathSum(TreeNode* root, int targetsum) {
+        
+       return  haspath(root,targetsum);
         
     }
 };
