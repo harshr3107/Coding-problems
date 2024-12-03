@@ -12,7 +12,8 @@
 class Solution {
 public:
     
-    void findallpath(TreeNode* root,int targetsum,int& sum,vector<int>& v,vector<vector<int>>& ans)
+    
+    void getpath(TreeNode* root,int targetsum,vector<int>& v,vector<vector<int>>& ans)
     {
         
         if(root==NULL)
@@ -22,7 +23,7 @@ public:
         
         if(root->left==NULL && root->right==NULL)
         {
-            if(sum+root->val==targetsum)
+            if(targetsum-root->val==0)
             {
                 v.push_back(root->val);
                 ans.push_back(v);
@@ -33,14 +34,12 @@ public:
         }
         
         
-        sum=sum+root->val;
         v.push_back(root->val);
-        
-        findallpath(root->left,targetsum,sum,v,ans);
-        findallpath(root->right,targetsum,sum,v,ans);
-        
-        sum=sum-root->val;
+        getpath(root->left,targetsum-root->val,v,ans);
+        getpath(root->right,targetsum-root->val,v,ans);
         v.pop_back();
+        
+        
         
         
         
@@ -52,16 +51,16 @@ public:
     
     
     
-    vector<vector<int>> pathSum(TreeNode* root, int targetsum) {
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         
-        vector<vector<int>> ans;
         vector<int> v;
-        int sum=0;
+        vector<vector<int>> ans;
         
-        findallpath(root,targetsum,sum,v,ans);
         
+        getpath(root,targetSum,v,ans);
         
         return ans;
+        
         
     }
 };
