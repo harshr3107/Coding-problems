@@ -12,52 +12,77 @@
 class Solution {
 public:
     
-    void getcount(TreeNode* root,int targetsum,vector<int>& num,int& count)
+    void getpath(TreeNode* root,int targetsum,long long csum,int& cpath)
     {
-        if(root==NULL)
+        //cout<<"csum: "<<csum<<" TargetSum: "<<targetsum<<endl;
+        
+         if(root==NULL)
         {
             return;
         }
         
-        num.push_back(root->val);
+       if(static_cast<long long>(csum)+root->val==targetsum)
+       {
+          //cout<<"i entered here\n";
+           cpath+=1;
+       }
+        
+       
         
         
+       
         
-        getcount(root->left,targetsum,num,count);
-        getcount(root->right,targetsum,num,count);
+      
+        //taking the node
         
-        long long sum=0;
+       
         
-        for(int i=num.size()-1;i>=0;i--)
-        {
-            sum+=num[i];
-            
-            
-            
-            if(sum==targetsum)
-            {
-                count++;
-                
-            }
-        }
+        getpath(root->left,targetsum,static_cast<long long>(csum)+root->val,cpath);
         
-        num.pop_back();
+        getpath(root->right,targetsum,static_cast<long long>(csum)+root->val,cpath);
         
+     
     }
     
     
     
     
+   void getallpath(TreeNode* root,int targetsum,int& ans)
+    {
+        
+        if(root==NULL)
+        {
+            return;
+        }
+        
+        int cpath=0;
+        long long csum=0;
+       
+        getpath(root,targetsum,csum,cpath);
+       
+        ans+=cpath;
+      // cout<<"at root ki val "<<root->val<<" the cur val of ans is "<<cpath<<endl;
+        
+        getallpath(root->left,targetsum,ans);
+        getallpath(root->right,targetsum,ans);
+        
+        
+    }
+        
     
-    int pathSum(TreeNode* root, int targetsum) {
+    
+    
+    
+    
+    
+    int pathSum(TreeNode* root, int targetSum) {
         
-        int count=0;
-        vector<int> num;
+    
+        int ans=0;
+        getallpath(root,targetSum,ans);
         
-        getcount(root,targetsum,num,count);
+        return ans;
         
-        
-        return count;
         
     }
 };
