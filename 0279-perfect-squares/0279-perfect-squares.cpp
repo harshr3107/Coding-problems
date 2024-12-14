@@ -39,24 +39,26 @@ public:
     
     int numSquares(int n) {
         
-        
+        /*
          int i=ceil(sqrt(n));
          vector<vector<int>> dp(i+1,vector<int>(n+1,-1));
         
-        return getmin(i,n,dp);
+        return getmin(i,n,dp);*/
         
-        /*
-         vector<vector<int>> dp(i+1,vector<int>(n+1,INT_MAX));
         
-        for(int k=0;k<=i;k++)
+        int sqr=floor(sqrt(n));
+        
+         vector<vector<int>> dp(sqr+1,vector<int>(n+1,INT_MAX));
+        
+        for(int k=0;k<=sqr;k++)
         {
             dp[k][0]=0;
         }
         
-        //return getmin(i,n,dp);
+       
         
         
-         /*for(int i=1;i<=sqrt(n)+1;i++)
+         for(int i=1;i<=sqr;i++)
          {
              for(int j=0;j<=n;j++)
              {
@@ -70,7 +72,7 @@ public:
                     take=1+dp[i][j-pow(i,2)];
                   }
         
-        //cout<<"val of i = "<<i<<" and n = "<<n<<endl;
+       // cout<<"val of i = "<<i<<" and n = "<<n<<endl;
         
         int nottake = dp[i-1][j];
         
@@ -86,9 +88,9 @@ public:
          }
          
         
-        return dp[i][n];
+        return dp[sqr][n];
          
-       */
+       
         
     }
 };
