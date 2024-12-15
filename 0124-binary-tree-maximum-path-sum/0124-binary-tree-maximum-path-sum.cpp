@@ -12,36 +12,9 @@
 class Solution {
 public:
     
-    int findpathsum(TreeNode* root,int& maxi)
+    
+    int getmaxi(TreeNode* root,int& ans)
     {
-        
-        if(root==NULL)
-        {
-            return NULL;
-        }
-        
-        if(root->left==NULL && root->right==NULL)
-        {
-            maxi=max(maxi,root->val);
-            return root->val;
-        }
-        
-        int left = findpathsum(root->left,maxi);
-        int right = findpathsum(root->right,maxi);
-        maxi = max(maxi,max(left+right+root->val,root->val));
-        
-        maxi = max(maxi,max(left+root->val,right+root->val));
-        //cout<<"current value of maxi is "<<maxi<<endl;
-        
-        return max(root->val+left,max(root->val+right,root->val));
-        
-        
-    }
-    
-    
-    
-    
-    int maxPathSum(TreeNode* root) {
         
         if(root==NULL)
         {
@@ -49,11 +22,49 @@ public:
         }
         
         
-        int maxi=INT_MIN;
-        findpathsum(root,maxi);
+        if(root->left==NULL && root->right==NULL)
+        {
+            ans = max(ans,root->val);
+            return root->val;
+        }
         
+        
+        int left = getmaxi(root->left,ans);
+        int right = getmaxi(root->right,ans);
+        
+        cout<<left<<" "<<right<<" "<<root->val<<endl;
+       
+        
+        int maxi = max(max(root->val+left,root->val+right),root->val);
+        
+        cout<<"current val of maxi is "<<maxi<<endl;
+        
+        ans = max(ans,max(maxi,left+right+root->val));
+        
+       
         
         return maxi;
+        
+        
+        
+       
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    int maxPathSum(TreeNode* root) {
+        
+        int ans=INT_MIN;
+        
+         getmaxi(root,ans);
+        
+        return ans;
         
         
         
