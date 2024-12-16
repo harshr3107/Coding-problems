@@ -1,23 +1,72 @@
 class Solution {
 public:
-    vector<int> getFinalState(vector<int>& nums, int k, int multiplier) {
+    
+    
+    
+    class compare{
         
-        for(int i=0;i<k;i++)
+        public:
+        
+        static bool operator()(pair<int,int>& a,pair<int,int>& b)
         {
-            int mini = *min_element(nums.begin(),nums.end());
-            //cout<<"value of mini is "<<mini<<endl;
-            int temp = mini;
-            mini=mini*multiplier;
-            //cout<<"new value of mini is "<<mini<<endl;
             
-            int h = find(nums.begin(),nums.end(),temp)-nums.begin();
-            nums[h]=mini;
-            //cout<<"value of h is "<<h<<endl;
+            if(a.first==b.first)
+            {
+                return a.second>b.second;
+            }
+            
+            return a.first>b.first;
+            
+            
+        }
+        
+    };
+    
+    
+    
+    vector<int> getFinalState(vector<int>& nums, int k, int m) {
+        
+        priority_queue<pair<int,int>,vector<pair<int,int>>,compare> minheap;
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            minheap.push(make_pair(nums[i],i));
             
         }
         
         
-        return nums;
+        while(!minheap.empty() && k>0)
+        {
+            
+            int a = minheap.top().first;
+            int b = minheap.top().second;
+            minheap.pop();
+            minheap.push(make_pair(a*m,b));
+            k--;
+
+        }
+        
+        vector<int> ans(nums.size());
+        
+        while(!minheap.empty())
+        {
+            int a = minheap.top().first;
+            int b = minheap.top().second;
+            minheap.pop();
+            
+            ans[b]=a;
+           
+
+        }
+       
+        
+        
+        return ans;
+        
+        
+        
+        
+        
         
     }
 };
