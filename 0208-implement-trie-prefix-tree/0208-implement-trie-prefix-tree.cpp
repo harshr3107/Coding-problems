@@ -1,142 +1,175 @@
+
 class trienode
 {
     public:
     
-    char data;
-    trienode* children[26];
-    bool isterminal;
     
-    trienode(char a)
-    {
-        data=a;
-        for(int i=0;i<26;i++)
-        {
-            children[i]=NULL;
-        }
+     char data;
+     vector<trienode*> children;
+     bool isterminal;
+    
+    
+    
+    trienode(char ch) {
         
-        isterminal=false;
-    }
+             data=ch;
+            
+            for(int i=0;i<26;i++)
+            {
+                children.push_back(NULL);
+            }
+         
+           isterminal=false;
+            
+            
+        }
+     
+
     
 };
 
+
+
+
+
+
+
 class Trie {
-
 public:
-
-    /** Initialize your data structure here. */
-
-    trienode* root;
-
+    
+    
+     
+     trienode* root;
+    
+    
+    
     Trie() {
-          root = new trienode('/');
-
-    }
-
-    void insertutil(string word,trienode* root)
+        
+         root = new trienode('/');
+        }
+    
+    
+ 
+        
+        
+        
+    
+    
+    
+    
+    void insertword(trienode* root,string word)
     {
-
+        
         if(word.length()==0)
         {
             root->isterminal=true;
             return;
         }
         
-        trienode* child;
-        
-        //find the index
         int index = word[0]-'a';
         
-        if(root->children[index]!=NULL)
+        if(root->children[index]==NULL)
         {
-            child=root->children[index];
-             
+            trienode* temp = new trienode(word.at(0));
+            root->children[index]=temp;
+            root=temp;
             
         }else{
             
-            child= new trienode(word[0]);
-            root->children[index]=child;
-            
+            root=root->children[index];
             
         }
         
+        insertword(root,word.substr(1));
         
-        insertutil(word.substr(1),child);
+        
+        
+        
         
     }
     
-    bool searchutil(string word,trienode* root)
+    
+    
+    bool searchword(trienode* root,string word)
     {
         
-
         if(word.length()==0)
         {
-            return root->isterminal;
-        }
-        
-        int index = word[0]-'a';
-        
-        trienode* child;
-        
-        if(root->children[index]!=NULL)
-        {
-            child = root->children[index];
+            if(root->isterminal)
+            {
+            return true;
+            }
             
-        }else{
             return false;
         }
         
-        return  searchutil(word.substr(1),child);
+        int index = word.at(0)-'a';
+        
+        if(root->children[index]==NULL)
+        {
+            return false;
+        }else{
+            
+            root=root->children[index];
+         }
+        
+        
+        
+        return searchword(root,word.substr(1));
         
     }
-
-    bool startsutil(string word,trienode* root)
+    
+    
+    
+    bool searchp(trienode* root,string word)
     {
-       if(word.length()==0)
+        
+        if(word.length()==0)
         {
+            
+            
             return true;
         }
         
-        int index = word[0]-'a';
+        int index = word.at(0)-'a';
         
-        trienode* child;
-        
-        if(root->children[index]!=NULL)
+        if(root->children[index]==NULL)
         {
-            child = root->children[index];
-            
-        }else{
             return false;
-        }
+        }else{
+            
+            root=root->children[index];
+         }
         
-        return  startsutil(word.substr(1),child);
         
-
-
-
+        
+        return searchp(root,word.substr(1));
+        
     }
     
     
     
-
-    /** Inserts a word into the trie. */
     void insert(string word) {
-
-        insertutil(word,root);
-
+      
+       insertword(root,word);
+        
+        
+        
     }
-
-    /** Returns if the word is in the trie. */
+    
     bool search(string word) {
-
-        return  searchutil(word,root);
-
+        
+       return  searchword(root,word);
+        
     }
-
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+    
     bool startsWith(string prefix) {
-
-        return startsutil(prefix,root);
-
+        
+        return searchp(root,prefix);
+        
+        
+        
+        
     }
 };
 
