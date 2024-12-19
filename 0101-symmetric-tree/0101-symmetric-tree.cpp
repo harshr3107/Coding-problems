@@ -12,30 +12,17 @@
 class Solution {
 public:
     
-    bool checksymetric(TreeNode* root1,TreeNode* root2)
+    bool check(TreeNode* root1,TreeNode* root2)
     {
+        
+        if((root1==NULL && root2!=NULL)  || (root2==NULL && root1!=NULL))
+        {
+            return false;
+        }
         
         if(root1==NULL && root2==NULL)
         {
             return true;
-        }
-        if(root1==NULL && root2!=NULL)
-        {
-            return false;
-        }
-        if(root1!=NULL && root2==NULL)
-        {
-            return false;
-        }
-        
-        if(checksymetric(root1->left,root2->right)==false)
-        {
-            return false;
-        }
-        
-        if(checksymetric(root1->right,root2->left)==false)
-        {
-            return false;
         }
         
         if(root1->val!=root2->val)
@@ -44,7 +31,19 @@ public:
         }
         
         
+        if(check(root1->left,root2->right)==false)
+        {
+            return false;
+        }
+        
+        if(check(root1->right,root2->left)==false)
+        {
+            return false;
+        }
+        
         return true;
+    
+        
         
     }
     
@@ -52,20 +51,19 @@ public:
     
     
     
+    
+    
+    
     bool isSymmetric(TreeNode* root) {
-        
-        bool ans=true;
-        
-        if(root==NULL)
+       
+        if(root==NULL || (root->left==NULL && root->right==NULL))
         {
-            return ans;
+            return true;
         }
         
-        ans = checksymetric(root->left,root->right);
         
-        return ans;
-        
-        
+        return check(root->left,root->right);
+       
         
     }
 };
