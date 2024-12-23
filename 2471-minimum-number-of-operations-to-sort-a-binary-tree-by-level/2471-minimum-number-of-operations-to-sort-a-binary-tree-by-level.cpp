@@ -14,132 +14,60 @@ public:
     
     
     
-    
-    
-    int getans(vector<int> v)
+    int getswap(vector<int>& v)
     {
+        
+        
+        
         
         vector<pair<int,int>> v1;
         
+        
         for(int i=0;i<v.size();i++)
         {
-            v1.push_back(make_pair(v[i],i));
+          
+           v1.push_back(make_pair(v[i],i));
         }
         
-        
+        cout<<endl;
         sort(v1.begin(),v1.end());
         
+        int swap=0;
         
-        int i=0;
-        int a=0;
         
-        while(i<v1.size())
+        for(int i=0;i<v1.size();i++)
         {
             
             if(v1[i].second==i)
             {
-                i++;
+                continue;
             }else{
                 
+                swap++;
                 int j=i+1;
                 while(v1[j].second!=i)
                 {
                     j++;
                 }
                 
-                swap(v1[j],v1[i]);
-                a++;
+                pair<int,int> temp = v1[j];
+                v1[j]=v1[i];
+                v1[i]=temp;
+                
                 
                 
                 
             }
-            
-            
         }
         
         
-       
-        return a;
+        return swap;
+        
         
         
         
     }
     
-    
-    int levelorder(TreeNode* root)
-    {
-        if(root==NULL || (root->left==NULL && root->right==NULL))
-        {
-            return 0;
-        }
-        
-        
-        queue<TreeNode*> q;
-        q.push(root);
-        q.push(NULL);
-        
-        vector<int> v;
-        
-        int ans=0;
-        
-        
-        
-        
-        while(!q.empty())
-        {
-            
-            TreeNode* temp = q.front();
-            q.pop();
-            
-            if(temp==NULL)
-            {
-                
-                if(v.size()!=1)
-                {
-                    ans+=getans(v);
-                    //cout<<"current val of ans is "<<ans<<endl;
-                }
-                
-                
-                v.clear();
-                
-            if(!q.empty())
-            {
-                q.push(NULL);
-            }
-                
-                
-                
-            }else{
-                
-                v.push_back(temp->val);
-                
-                if(temp->left!=NULL)
-                {
-                    q.push(temp->left);
-                }
-                
-                if(temp->right!=NULL)
-                {
-                    q.push(temp->right);
-                    
-                }
-                
-                
-                
-            }
-            
-            
-            
-        }
-        
-        return ans;
-        
-        
-        
-        
-        
-    }
     
     
     
@@ -151,7 +79,56 @@ public:
     
     int minimumOperations(TreeNode* root) {
         
-        return levelorder(root);
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(NULL);
+        
+        vector<int> v;
+        
+        int ans=0;
+        
+        while(!q.empty())
+        {
+            TreeNode* temp = q.front();
+            q.pop();
+            
+            if(temp==NULL)
+            {
+                
+                ans+=getswap(v);
+                v.clear();
+                
+                if(!q.empty())
+                {
+                    q.push(NULL);
+                }
+                
+            }else{
+                
+                v.push_back(temp->val);
+                
+                
+                if(temp->left!=NULL)
+                {
+                    q.push(temp->left);
+                }
+                
+                if(temp->right!=NULL)
+                {
+                    q.push(temp->right);
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
+        return ans;
         
     }
 };
