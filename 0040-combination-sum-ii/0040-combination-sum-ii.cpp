@@ -1,79 +1,59 @@
 class Solution {
 public:
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        
-        vector<vector<int>> ans;
-        
-        vector<int> v;
-       
-        sort(candidates.begin(),candidates.end());
-        getcombi(candidates,0,target,v,ans);
-        
-        
-        
-        
-        
-        return ans;
-        
-        
-    }
     
     
     
-    void getcombi(vector<int> candidates,int ind,int target,vector<int> v,vector<vector<int>>& ans)
+    void getallcombi(vector<int>& nums,int target,int ind,vector<int>& v,set<vector<int>>& ans)
     {
         
-        if(target<0)
+        if(target==0)
+        {
+            
+            ans.insert(v);
+            return;
+        }
+        
+        if(ind<0)
         {
             return;
         }
-       
-        
-      
-        
-            if(target==0)
-            {
-            
-              ans.push_back(v);
-                return;
-            }
-            
-            
-                
-    
         
         
-        for(int i=ind;i<candidates.size();i++)
+        
+        
+        if(target-nums[ind]>=0)
         {
-            if(i>ind && candidates[i]==candidates[i-1])
-            {
-                continue;
-            }
-            if(candidates[i]>target)
-            {
-                //break;
-                return;
-            }
-        
-       
-        v.push_back(candidates[i]);
-          target-=candidates[i];  
-        getcombi(candidates,i+1,target,v,ans);
-            target+=candidates[i];
-            
-        v.pop_back();
-       
-        
-        
+            v.push_back(nums[ind]);
+            getallcombi(nums,target-nums[ind],ind-1,v,ans);
+            v.pop_back();
         }
         
-            
+        while(ind>0 && nums[ind]==nums[ind-1])
+        {
+            ind--;
+        }
         
-        
+        getallcombi(nums,target,ind-1,v,ans);
     }
     
     
     
-    
-    
+    vector<vector<int>> combinationSum2(vector<int>& nums, int target) {
+        
+        
+      
+        sort(nums.begin(),nums.end());
+        set<vector<int>> ans;
+        vector<int> v;
+        
+        getallcombi(nums,target,nums.size()-1,v,ans);
+        
+        
+        vector<vector<int>> a(ans.begin(),ans.end());
+        
+        return a;
+        
+        
+        
+    }
 };
