@@ -21,7 +21,6 @@ public:
         
         int vtake=INT_MIN;
         int vnottake = INT_MIN;
-        //int nottake = INT_MIN;
         
         
         
@@ -36,28 +35,7 @@ public:
            
         return dp[ind][curtime];
             
-        
-        /*for(int i=0;i<satisfaction.size();i++)
-        { 
-            if(visited[i]==true)
-            {
-                continue;
-            }
-            
-            
-            visited[i]=true;
-            c++;
-            vtake = curtime*satisfaction[i]+getmin(satisfaction,curtime+1,visited,dp,c);
-            vnottake = getmin(satisfaction,curtime,visited,dp,c);
-            visited[i]=false;
-            c--;
-            //c--;
-           // nottake = getmin(satisfaction,curtime,visited,dp,c);
-                
-               
-        }*/
-        
-        
+       
         
         
     }
@@ -66,13 +44,39 @@ public:
     
     
     int maxSatisfaction(vector<int>& satisfaction) {
-        
+        /*
         vector<vector<int>> dp(satisfaction.size(),vector<int>(satisfaction.size()+1,-1));
         sort(satisfaction.begin(),satisfaction.end());
-        vector<bool> visited(satisfaction.size(),false);
         int curtime=1;
         int ind=0;
         return getmin(satisfaction,ind,curtime,dp);
+            */
+            
+             vector<vector<int>> dp(satisfaction.size()+1,vector<int>(satisfaction.size()+2,0));
+             sort(satisfaction.begin(),satisfaction.end());
+        
+            for(int ind=satisfaction.size()-1;ind>=0;ind--)
+            {
+                
+                for(int curtime=ind+1;curtime>=0;curtime--)
+                {
+                    
+                     int vtake=INT_MIN;
+                     int vnottake = INT_MIN;
+        
+                      vtake = (curtime+1)*satisfaction[ind]+dp[ind+1][curtime+1];
+                      vnottake =dp[ind+1][curtime];
+        
+                     dp[ind][curtime] = max(vtake,vnottake);
+                    
+                    
+                    
+                }
+                
+                
+            }
+            
+            return dp[0][0];
         
     }
 };
