@@ -17,6 +17,7 @@ public:
             return 0;
         }
         
+        
         if(s.length()==1)
         {
             return 1;
