@@ -2,103 +2,91 @@ class Solution {
 public:
     
     
-    int getminways(string w1,string w2,int i,int j,vector<vector<int>>& dp)
+    
+    int getminimum(string word1,string word2,int ind1,int ind2,vector<vector<int>>& dp)
     {
         
         
-        
-        
-        if(j>=w2.length())
+        if(ind1==word1.length() && ind2==word2.length())
         {
-            
-            
-            return (w1.length()-i);
+            return 0;
         }
         
-        if(i>=w1.length())
-        {
-            return (w2.length()-j);
+        if (ind1 == word1.length()) {
+            return word2.length() - ind2;
+        }
+        if (ind2 == word2.length()) {
+            return word1.length() - ind1;
         }
         
-        if(dp[i][j]!=-1)
+        if(dp[ind1][ind2]!=-1)
         {
-            return dp[i][j];
+            return dp[ind1][ind2];
         }
+       
         
-        int bway=INT_MAX;
         
-        if(w1.at(i)==w2.at(j))
-        {
-            bway=getminways(w1,w2,i+1,j+1,dp);
-        }
-        int iway = 1+getminways(w1,w2,i,j+1,dp);
-        int rway = 1+getminways(w1,w2,i+1,j+1,dp);
-        int dway = 1+getminways(w1,w2,i+1,j,dp);
+        int insert = 1e9+7;
+        int deletee = 1e9+7;
+        int replace = 1e9+7;
+        int no_opp = 1e9+7;
         
-        dp[i][j] = min(min(bway,iway),min(rway,dway));
         
-        return dp[i][j];
+      
+        
+      if(word1.at(ind1)==word2.at(ind2))
+      {
+          no_opp = getminimum(word1,word2,ind1+1,ind2+1,dp);
+          
+      }else{
+          
+      
+        
+        
+        
+        
+        //insert a character
+       
+         insert = 1+getminimum(word1,word2,ind1,ind2+1,dp);
+        
+        //delete a character
+        
+         deletee = 1+getminimum(word1,word2,ind1+1,ind2,dp);
+        
+        //repalce a character
+        
+        
+         replace = 1+getminimum(word1,word2,ind1+1,ind2+1,dp);
+        
+      
+      }
+        
+        
+        dp[ind1][ind2]=min(min(insert,no_opp),min(deletee,replace));
+        
+        return dp[ind1][ind2];
+        
+        
+        
         
         
     }
+        
     
     
     
     
-    int minDistance(string w1, string w2) {
+    
+    
+    
+    int minDistance(string word1, string word2) {
         
-         /*vector<vector<int>>  dp(w1.length()+1,vector<int>(w2.length()+1,-1));
+        int ind1=0;
+        int ind2=0;
         
-        if(w1.length()==0)
-        {
-            return w2.length();
-        }   
+        vector<vector<int>> dp(word1.length()+1,vector<int>(word2.length()+1,-1));
+         
+        return getminimum(word1,word2,ind1,ind2,dp);
         
-        
-            
-        
-        return getminways(w1,w2,0,0,dp);*/
-        
-        
-        vector<vector<int>>  dp(w1.length()+1,vector<int>(w2.length()+1,-1));
-        
-        for(int i=0;i<=w1.length();i++)
-        {
-            dp[i][0]=i;
-        }
-        
-        for(int j=0;j<=w2.length();j++)
-        {
-            dp[0][j]=j;
-        }
-        
-        for(int i=1;i<=w1.length();i++)
-        {
-            for(int j=1;j<=w2.length();j++)
-            {
-                
-                int bway=INT_MAX;
-                
-                if(w1[i-1]==w2[j-1])
-                {
-                    bway=dp[i-1][j-1];
-                }
-                
-                 int iway = 1+dp[i][j-1];
-                 int rway = 1+dp[i-1][j-1];
-                 int dway = 1+dp[i-1][j];
-        
-            dp[i][j] = min(min(bway,iway),min(rway,dway));
-                
-                
-                
-                
-                
-            }
-            
-        }
-        
-        return dp[w1.length()][w2.length()];
-       
     }
 };
