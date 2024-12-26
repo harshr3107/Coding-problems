@@ -37,6 +37,9 @@ public:
       if(word1.at(ind1)==word2.at(ind2))
       {
           no_opp = getminimum(word1,word2,ind1+1,ind2+1,dp);
+          dp[ind1][ind2]=no_opp;
+          
+          return dp[ind1][ind2];
           
       }else{
           
