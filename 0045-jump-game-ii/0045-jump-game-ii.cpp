@@ -2,35 +2,34 @@ class Solution {
 public:
     
     
-   long long getjump(vector<int>& nums,int cindex,vector<int>& dp)
+    int minjump(vector<int>& nums,int ind,vector<int>& dp)
     {
-        //cout<<"the cindex is "<<cindex<<endl;
         
-        if(cindex>=(nums.size()-1))
+        if(ind==nums.size()-1)
         {
             return 0;
         }
         
-        
-       if(dp[cindex]!=-1)
+        if(dp[ind]!=-1)
         {
-            return dp[cindex];
+            return dp[ind];
         }
         
-        long long ans=INT_MAX;
         
-        for(int i=1;i<=nums[cindex];i++)
+        
+        int ans=1e9+7;
+        
+        for(int j=1;j<=nums[ind];j++)
         {
-            long long jump = 1+getjump(nums,cindex+i,dp);
-            ans=min(ans,jump);
+            if((ind+j)<nums.size())
+            {
+                ans = min(ans,1+minjump(nums,ind+j,dp));
+            }
             
         }
-            
-        dp[cindex]=ans;
         
-        return dp[cindex];
-        
-        
+        dp[ind]=ans;
+        return dp[ind];
         
     }
     
@@ -40,14 +39,9 @@ public:
     
     int jump(vector<int>& nums) {
         
-        int cindex=0;
-        vector<int> dp(nums.size()+1,-1);
+        vector<int> dp(nums.size(),-1);
         
-        return getjump(nums,cindex,dp);
-        
-
-        
-        
+        return minjump(nums,0,dp);
         
     }
 };
